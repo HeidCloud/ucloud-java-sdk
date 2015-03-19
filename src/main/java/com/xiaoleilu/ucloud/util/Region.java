@@ -1,7 +1,8 @@
 package com.xiaoleilu.ucloud.util;
 
 /**
- * 数据中心
+ * 数据中心列表
+ * @see http://docs.ucloud.cn/api/regionlist.html
  * @author Looly
  *
  */

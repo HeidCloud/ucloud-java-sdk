@@ -1,57 +1,54 @@
 package com.xiaoleilu.ucloud;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import com.xiaoleilu.hutool.HttpUtil;
+import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.hutool.StrUtil;
+import com.xiaoleilu.hutool.log.LogWrapper;
+import com.xiaoleilu.ucloud.entity.Param;
 import com.xiaoleilu.ucloud.util.Config;
 
+/**
+ * Ucloud Api请求客户端
+ * @author Looly
+ *
+ */
 public class UcloudApiClient {
+	private final static LogWrapper log = Log.get();
 	
-	private String publicKey;
 	
-	public UcloudApiClient(String publicKey) {
-		this.publicKey = publicKey;
+	// --------------------------------------------------------------- Constructor start
+	public UcloudApiClient() {
 	}
+	// --------------------------------------------------------------- Constructor end
 	
-	public String get(String uri, Map<String, Object> params) throws IOException{
-		Map<String, Object> map = clone(params);
-		map.put("PublicKey", this.publicKey);
+	/**
+	 * get请求API
+	 * @param resource 请求的资源
+	 * @param param 参数
+	 * @return 请求结果
+	 * @throws IOException
+	 */
+	public String get(String resource, Param param) throws IOException{
+		String uri = StrUtil.format("{}{}?{}", Config.BASE_URL, resource, param.genHttpParam());
 		
-		String response = HttpUtil.get(Config.BASE_URL + "/" + uri + "?" + encodeParams(map), Config.CHARSET, false);
+		log.debug("Get {}", uri);
+		String response = HttpUtil.get(uri, Config.CHARSET, false);
 		return response;
 	}
 	
-	/**
-	 * 浅复制map
-	 * @param params 参数map
-	 * @return 复制后的map
-	 */
-	private Map<String, Object> clone(Map<String, Object> params){
-		HashMap<String, Object> hashMap = new HashMap<String, Object>();
-		hashMap.putAll(params);
-		return hashMap;
-	}
-	
-	/**
-	 * url转义参数值
-	 * @param params
-	 */
-	private String encodeParams(Map<String, Object> params){
-		Set<String> keys = params.keySet();
-		Object value;
-		for (String key : keys) {
-			value = params.get(key);
-			params.put(key, HttpUtil.encode(StrUtil.str(value), Config.CHARSET));
-		}
+	public static void main(String[] args) throws IOException {
 		
-		return HttpUtil.toParams(params);
-	}
-	
-	public static void main(String[] args) {
-		UcloudApiClient client = new UcloudApiClient("ucloudsomeone@example.com1296235120854146120");
+		Param param = new Param();
+		param
+			.set("Action", "SendSms")
+			.set("Content", "message")
+			.set("Phone.0", "18847336369");
+		
+		UcloudApiClient client = new UcloudApiClient();
+		String res = client.get("/", param);
+		
+		System.out.println(res);
 	}
 }
