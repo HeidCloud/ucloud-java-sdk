@@ -38,6 +38,17 @@ public class UcloudApiClient {
 		return response;
 	}
 	
+	/**
+	 * get请求API<br>
+	 * resource 使用默认的 /
+	 * @param param 参数
+	 * @return 请求结果
+	 * @throws IOException
+	 */
+	public String get(Param param) throws IOException{
+		return get("/", param);
+	}
+	
 	public static void main(String[] args) throws IOException {
 		
 		Param param = new Param();

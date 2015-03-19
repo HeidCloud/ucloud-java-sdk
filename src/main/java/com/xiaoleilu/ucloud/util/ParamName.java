@@ -12,5 +12,9 @@ public class ParamName {
 	public final static String PUBLIC_KEY = "PublicKey";
 	/** 签名 */
 	public final static String SIGNATURE = "Signature";
+	/** 操作 */
+	public final static String ACTION = "Action";
+	/** 数据中心 */
+	public final static String REGION = "Region";
 	
 }
