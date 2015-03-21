@@ -2,11 +2,9 @@ package com.xiaoleilu.ucloud.uhost;
 
 import java.io.IOException;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.xiaoleilu.ucloud.UcloudApiClient;
-import com.xiaoleilu.ucloud.entity.Param;
-import com.xiaoleilu.ucloud.util.ParamName;
+import com.xiaoleilu.ucloud.entity.Request;
+import com.xiaoleilu.ucloud.entity.Response;
 import com.xiaoleilu.ucloud.util.Region;
 
 /**
@@ -21,30 +19,17 @@ public class Uhost {
 	 * 获取主机或主机列表信息，并可根据数据中心，主机ID等参数进行过滤。
 	 * @throws IOException
 	 */
-	public JSONObject describeUHostInstance() throws IOException{
-		Param param = new Param();
-		param
-		.set(ParamName.ACTION, "DescribeUHostInstance")
-		.set(ParamName.REGION, Region.CN_NORTH_03);
-		
-		UcloudApiClient client = new UcloudApiClient();
-		String jsonStr = client.get(param);
-		
-		return JSON.parseObject(jsonStr);
+	public Response describeUHostInstance() throws IOException{
+		final Request request = new Request("DescribeUHostInstance", Region.CN_NORTH_03);
+		return client.get(request);
 	}
 	
 	/**
 	 * 获取主机或主机列表信息，并可根据数据中心，主机ID等参数进行过滤。
 	 * @throws IOException
 	 */
-	public JSONObject describeImage() throws IOException{
-		Param param = Param.create();
-		param
-		.set(ParamName.REGION, Region.CN_NORTH_03)
-		.set(ParamName.ACTION, "DescribeImage");
-		
-		
-		String jsonStr = client.get(param);
-		return JSON.parseObject(jsonStr);
+	public Response describeImage() throws IOException{
+		final Request request = new Request("DescribeImage", Region.CN_NORTH_03);
+		return client.get(request);
 	}
 }

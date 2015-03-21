@@ -20,11 +20,11 @@ public class UhostTest {
 	
 	@Test
 	public void describeUHostInstance() throws IOException{
-		log.debug(uhost.describeUHostInstance().toString());
+		log.debug("Junit: {}", uhost.describeUHostInstance().toString());
 	}
 	
 	@Test
 	public void describeImage() throws IOException{
-		log.debug(uhost.describeImage().toString());
+		log.debug("Junit: {}", uhost.describeImage().toString());
 	}
 }

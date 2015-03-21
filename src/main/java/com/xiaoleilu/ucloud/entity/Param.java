@@ -5,21 +5,23 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import com.xiaoleilu.hutool.Conver;
 import com.xiaoleilu.hutool.HttpUtil;
 import com.xiaoleilu.hutool.InjectUtil;
 import com.xiaoleilu.hutool.SecureUtil;
 import com.xiaoleilu.hutool.StrUtil;
-import com.xiaoleilu.hutool.exceptions.UtilException;
+import com.xiaoleilu.ucloud.exception.ParamException;
 import com.xiaoleilu.ucloud.util.Config;
+import com.xiaoleilu.ucloud.util.Global;
 import com.xiaoleilu.ucloud.util.ParamName;
 
 /**
- * 请求API的参数对象
+ * 参数对象
  * 
  * @author Looly
  *
@@ -36,59 +38,25 @@ public class Param extends TreeMap<String, Object> {
 	public static Param create() {
 		return new Param();
 	}
+	
+	/**
+	 * 创建参数对象
+	 * 
+	 * @param paramMap 参数Map
+	 * @return 参数对象
+	 */
+	public static Param create(Map<String, Object> paramMap) {
+		return (new Param()).setAll(paramMap);
+	}
 	// --------------------------------------------------------------- Static method end
 	
-	private String privateKey;
-
 	// --------------------------------------------------------------- Constructor start
 	/**
 	 * 构造，使用配置文件中定义的公钥和私钥
 	 */
 	public Param() {
-		this(Config.PUBLIC_KEY, Config.PRIVATE_KEY);
-	}
-	
-	/**
-	 * 构造
-	 * @param publicKey 自定义的公钥
-	 * @param privateKey 自定义的私钥
-	 */
-	public Param(String publicKey, String privateKey) {
-		this.set(ParamName.PUBLIC_KEY, publicKey);
-		this.privateKey = privateKey;
 	}
 	// --------------------------------------------------------------- Constructor end
-
-	/**
-	 * 填充Value Object对象
-	 * 
-	 * @param vo Value Object（或者POJO）
-	 * @return vo
-	 */
-	public <T> T fillVo(T vo) {
-		InjectUtil.injectFromMap(vo, this);
-		return vo;
-	}
-
-	/**
-	 * 填充Value Object对象
-	 * 
-	 * @param clazz Value Object（或者POJO）的类
-	 * @return vo
-	 */
-	public <T> T toVo(Class<T> clazz) {
-		if (clazz == null) {
-			throw new NullPointerException("Provided Class is null!");
-		}
-		T vo;
-		try {
-			vo = clazz.newInstance();
-		} catch (Exception e) {
-			throw new UtilException(StrUtil.format("Instance Value Object [] error!", clazz.getName()));
-		}
-		InjectUtil.injectFromMap(vo, this);
-		return vo;
-	}
 
 	/**
 	 * 将值对象转换为Entity<br>
@@ -112,6 +80,18 @@ public class Param extends TreeMap<String, Object> {
 	 */
 	public Param set(String attr, Object value) {
 		super.put(attr, value);
+		return this;
+	}
+	
+	/**
+	 * 设置多列
+	 * 
+	 * @param attr 属性
+	 * @param value 值
+	 * @return 本身
+	 */
+	public Param setAll(Map<String, Object> map) {
+		super.putAll(map);
 		return this;
 	}
 
@@ -260,7 +240,7 @@ public class Param extends TreeMap<String, Object> {
 		}
 		sb.append(privateKey);
 
-		return SecureUtil.sha1(sb.toString(), Config.CHARSET);
+		return SecureUtil.sha1(sb.toString(), Global.CHARSET);
 	}
 	
 	/**
@@ -273,7 +253,7 @@ public class Param extends TreeMap<String, Object> {
 		Object value;
 		for (String key : keys) {
 			value = param.get(key);
-			param.put(key, HttpUtil.encode(StrUtil.str(value), Config.CHARSET));
+			param.put(key, HttpUtil.encode(StrUtil.str(value), Global.CHARSET));
 		}
 
 		return HttpUtil.toParams(param);
@@ -283,10 +263,27 @@ public class Param extends TreeMap<String, Object> {
 	 * 生成Http请求参数字符串
 	 * @return Http请求参数字符串
 	 */
-	public String genHttpParam(){
-		//1. 生成签名
-		this.set(ParamName.SIGNATURE, this.signature(privateKey));
-		//2. 生成Http参数字符串
+	public String genHttpParam(Config config){
+		//指令名称和数据中心必须存在
+		assertParams(ParamName.ACTION, ParamName.REGION);
+		
+		//1. 设置公钥
+		this.set(ParamName.PUBLIC_KEY, config.getPublicKey());
+		//2. 生成签名
+		this.set(ParamName.SIGNATURE, this.signature(config.getPrivateKey()));
+		//3. 生成Http参数字符串
 		return this.encode();
+	}
+	
+	/**
+	 * 检查参数
+	 * @param paramNames 参数名
+	 */
+	private void assertParams(String... paramNames){
+		for (String paramName : paramNames) {
+			if(false == this.containsKey(paramName)){
+				throw new ParamException("Parameter '{}' not found!", paramName);
+			}
+		}
 	}
 }
