@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud.entity;
+package com.xiaoleilu.ucloud;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -12,7 +12,6 @@ import java.util.TreeMap;
 
 import com.xiaoleilu.hutool.Conver;
 import com.xiaoleilu.hutool.HttpUtil;
-import com.xiaoleilu.hutool.InjectUtil;
 import com.xiaoleilu.hutool.SecureUtil;
 import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.ucloud.exception.ParamException;
@@ -58,18 +57,6 @@ public class Param extends TreeMap<String, Object> {
 	}
 	// --------------------------------------------------------------- Constructor end
 
-	/**
-	 * 将值对象转换为Entity<br>
-	 * 类名会被当作表名，小写第一个字母
-	 * 
-	 * @param vo 值对象
-	 * @return 自己
-	 */
-	public Param parse(Object vo) {
-		this.putAll(InjectUtil.toMap(vo, false));
-		return this;
-	}
-
 	// -------------------------------------------------------------------- 特定类型值
 	/**
 	 * 设置列
@@ -79,8 +66,19 @@ public class Param extends TreeMap<String, Object> {
 	 * @return 本身
 	 */
 	public Param set(String attr, Object value) {
-		super.put(attr, value);
+		if (null != attr && null != value) {
+			put(attr, value);
+		}
 		return this;
+	}
+	
+	/**
+	 * 设置API指令
+	 * @param action API指令
+	 * @return 本身
+	 */
+	public Param setAction(Action action) {
+		return set(Action.KEY, action);
 	}
 	
 	/**
@@ -91,20 +89,8 @@ public class Param extends TreeMap<String, Object> {
 	 * @return 本身
 	 */
 	public Param setAll(Map<String, Object> map) {
-		super.putAll(map);
-		return this;
-	}
-
-	/**
-	 * 设置列，当键或值为null时忽略
-	 * 
-	 * @param attr 属性
-	 * @param value 值
-	 * @return 本身
-	 */
-	public Param setIgnoreNull(String attr, Object value) {
-		if (null != attr && null != value) {
-			set(attr, value);
+		for (Entry<String, Object> entry : map.entrySet()) {
+			this.set(entry.getKey(), entry.getValue());
 		}
 		return this;
 	}

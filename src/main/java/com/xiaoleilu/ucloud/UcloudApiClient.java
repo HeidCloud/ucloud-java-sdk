@@ -7,9 +7,6 @@ import com.xiaoleilu.hutool.HttpUtil;
 import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.hutool.log.LogWrapper;
-import com.xiaoleilu.ucloud.entity.Param;
-import com.xiaoleilu.ucloud.entity.Request;
-import com.xiaoleilu.ucloud.entity.Response;
 import com.xiaoleilu.ucloud.util.Config;
 import com.xiaoleilu.ucloud.util.Global;
 import com.xiaoleilu.ucloud.util.RetCode;
@@ -60,7 +57,8 @@ public class UcloudApiClient {
 			resStr = HttpUtil.get(uri, Global.CHARSET, false);
 		} catch (IOException e) {
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put(Response.KEY_RET_CODE	, RetCode.ERROR);
+			jsonObject.put("RetCode"	, RetCode.ERROR);
+			jsonObject.put("Message", e.getMessage());
 			resStr = jsonObject.toString();
 		}
 		
@@ -75,7 +73,7 @@ public class UcloudApiClient {
 	 * @return 请求结果
 	 * @throws IOException
 	 */
-	public Response get(String resource, Param param) throws IOException{
+	public Response get(String resource, Param param){
 		return Response.parse(getForStr(resource, param));
 	}
 	
@@ -86,18 +84,20 @@ public class UcloudApiClient {
 	 * @return 请求结果
 	 * @throws IOException
 	 */
-	public Response get(Param param) throws IOException{
+	public Response get(Param param){
 		return get("/", param);
 	}
 	
 	/**
 	 * get请求API<br>
 	 * resource 使用默认的 /
+	 * @param action API指令
 	 * @param param 参数
 	 * @return 请求结果
 	 * @throws IOException
 	 */
-	public Response get(Request request) throws IOException{
-		return get("/", request.genParam());
+	public Response get(Action action, Param param){
+		param.setAction(action);
+		return get("/", param);
 	}
 }
