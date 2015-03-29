@@ -8,9 +8,9 @@ charset = utf8
 
 ##公钥和私钥，获取地址：https://account.ucloud.cn/account/user#api_key
 #公钥
-public_key = ucloudloolly@gmail.com14266462810001445982876
+public_key = 
 #私钥
-private_key = 008a671eaf0f9f278f65337b1ad601866348e445
+private_key = 
 
 #API的URL
 base_url = https://api.ucloud.cn
