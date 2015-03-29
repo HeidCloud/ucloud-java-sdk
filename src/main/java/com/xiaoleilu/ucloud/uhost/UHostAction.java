@@ -16,7 +16,9 @@ public enum UHostAction implements Action{
 	TerminateUHostInstance,
 	/**
 	 *  修改指定UHost实例的资源配置，如CPU核心数，内存容量大小，磁盘空间大小等。 <br>
-	 *  修改配置注意事项： 1.修改配置前，请确认该实例已经被关闭。 2.修改磁盘空间大小后，请在启动后按照说明，进入操作系统进行操作。
+	 *  修改配置注意事项：  <br>
+	 *  1.修改配置前，请确认该实例已经被关闭。  <br>
+	 *  2.修改磁盘空间大小后，请在启动后按照说明，进入操作系统进行操作。 <br>
 	 */
 	ResizeUHostInstance,
 	/**
@@ -25,7 +27,7 @@ public enum UHostAction implements Action{
 	 * 2.请确认该实例未挂载UDisk；<br>
 	 * 3.将原系统重装为不同类型的系统时(Linux->Windows)，不可选择保留数据盘； <br>
 	 * 4.重装不同版本的系统时(CentOS6->CentOS7)，若选择保留数据盘，请注意数据盘的文件系统格式； <br>
-	 * 5.若主机CPU低于2核，不可重装为Windows系统。<br>
+	 * 5.若主机CPU低于2核，不可重装为Windows系统。
 	 */
 	ReinstallUHostInstance,
 	/** 启动处于关闭状态的UHost实例，需要指定数据中心及UHostID两个参数的值。 */

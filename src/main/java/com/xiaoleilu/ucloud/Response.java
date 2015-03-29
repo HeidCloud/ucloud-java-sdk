@@ -64,6 +64,14 @@ public class Response{
 		return this.json;
 	}
 	
+	/**
+	 * 输出格式化后的JSON字符串
+	 * @return 格式化后的JSON字符串
+	 */
+	public String toPretty(){
+		return JSON.toJSONString(this.json, true);
+	}
+	
 	@Override
 	public String toString() {
 		return this.json.toJSONString();

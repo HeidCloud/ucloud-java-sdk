@@ -17,7 +17,6 @@ import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.ucloud.exception.ParamException;
 import com.xiaoleilu.ucloud.util.Config;
 import com.xiaoleilu.ucloud.util.Global;
-import com.xiaoleilu.ucloud.util.ParamName;
 
 /**
  * 参数对象
@@ -26,7 +25,17 @@ import com.xiaoleilu.ucloud.util.ParamName;
  *
  */
 public class Param extends TreeMap<String, Object> {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1190594719758105119L;
+	
+	/**
+	 * 参数名接口<br>
+	 * 具体的参数枚举类需要实现这个接口
+	 * @author Looly
+	 *
+	 */
+	public static interface Name{
+		String toString();
+	}
 
 	// --------------------------------------------------------------- Static method start
 	/**
@@ -61,15 +70,26 @@ public class Param extends TreeMap<String, Object> {
 	/**
 	 * 设置列
 	 * 
-	 * @param attr 属性
+	 * @param name 参数名
 	 * @param value 值
 	 * @return 本身
 	 */
-	public Param set(String attr, Object value) {
-		if (null != attr && null != value) {
-			put(attr, value);
+	public Param set(String name, Object value) {
+		if (null != name && null != value) {
+			put(name, value);
 		}
 		return this;
+	}
+	
+	/**
+	 * 设置列
+	 * 
+	 * @param paramName 参数名（枚举类型）
+	 * @param value 值
+	 * @return 本身
+	 */
+	public Param set(Name paramName, Object value) {
+		return set(paramName.toString(), value);
 	}
 	
 	/**
@@ -93,6 +113,15 @@ public class Param extends TreeMap<String, Object> {
 			this.set(entry.getKey(), entry.getValue());
 		}
 		return this;
+	}
+	
+	/**
+	 * 特殊参数：设置密码，此方法对密码做了Base64编码
+	 * @param password 密码
+	 * @return 本身
+	 */
+	public Param setPassword(String password){
+		return set(PublicName.Password, SecureUtil.base64(password, Global.CHARSET));
 	}
 
 	/**
@@ -251,12 +280,12 @@ public class Param extends TreeMap<String, Object> {
 	 */
 	public String genHttpParam(Config config){
 		//指令名称和数据中心必须存在
-		assertParams(ParamName.ACTION, ParamName.REGION);
+		assertParams(PublicName.Action, PublicName.Region);
 		
 		//1. 设置公钥
-		this.set(ParamName.PUBLIC_KEY, config.getPublicKey());
+		this.set(PublicName.PublicKey, config.getPublicKey());
 		//2. 生成签名
-		this.set(ParamName.SIGNATURE, this.signature(config.getPrivateKey()));
+		this.set(PublicName.Signature, this.signature(config.getPrivateKey()));
 		//3. 生成Http参数字符串
 		return this.encode();
 	}
@@ -265,9 +294,9 @@ public class Param extends TreeMap<String, Object> {
 	 * 检查参数
 	 * @param paramNames 参数名
 	 */
-	private void assertParams(String... paramNames){
-		for (String paramName : paramNames) {
-			if(false == this.containsKey(paramName)){
+	private void assertParams(PublicName... paramNames){
+		for (PublicName paramName : paramNames) {
+			if(false == this.containsKey(paramName.name())){
 				throw new ParamException("Parameter '{}' not found!", paramName);
 			}
 		}

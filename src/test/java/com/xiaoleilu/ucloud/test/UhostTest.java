@@ -27,14 +27,24 @@ public class UhostTest {
 				.set("Offset", 0)
 				.set("Limit", 50);
 		
-		log.debug("Junit: {}", uhost.describeUHostInstance(param).toString());
+		log.debug("Junit: {}", uhost.describeUHostInstance(param).toPretty());
 	}
 	
 	@Test
 	public void describeImage() throws IOException{
 		Param param = Param.create()
-				.set("Region", Region.CN_NORTH_03);
+				.set("Region", Region.CN_NORTH_03)
+				.set("Offset", 0)
+				.set("Limit", 5);
 		
-		log.debug("Junit: {}", uhost.describeImage(param).toString());
+		log.debug("Junit: {}", uhost.describeImage(param).toPretty());
+	}
+	
+	public static void main(String[] args) {
+		final Param param = Param.create()
+				.set("Region", Region.CN_NORTH_03)
+				.set("UHostId", "aaaaaaaaaa");
+		
+		System.out.println(param);
 	}
 }
