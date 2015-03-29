@@ -1,4 +1,6 @@
 # ucloud-java-sdk
+ucloud-java-sdk是Ucloud官方API的Java封装，此SDK不但提供了接口的完整封装，还提供了一些自动化运维和自动化伸缩的相关功能。
+
 
 ## UcloudApiClient 使用
 ```Java
