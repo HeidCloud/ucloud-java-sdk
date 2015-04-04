@@ -280,7 +280,7 @@ public class Param extends TreeMap<String, Object> {
 	 */
 	public String genHttpParam(Config config){
 		//指令名称和数据中心必须存在
-		assertParams(PubName.Action, PubName.Region);
+		assertParams(PubName.Action);
 		
 		//1. 设置公钥
 		this.set(PubName.PublicKey, config.getPublicKey());

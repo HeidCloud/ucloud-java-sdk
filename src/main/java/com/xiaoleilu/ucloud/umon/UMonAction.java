@@ -7,7 +7,9 @@ import com.xiaoleilu.ucloud.core.Action;
  * @author Looly
  *
  */
-public enum UNetAction implements Action{
+public enum UMonAction implements Action{
 	/** 获取监控数据 */
-	GetMetric
+	GetMetric,
+	/** 发送短信 */
+	SendSms
 }

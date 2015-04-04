@@ -1,0 +1,71 @@
+package com.xiaoleilu.ucloud.umon;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.slf4j.Logger;
+
+import com.xiaoleilu.hutool.Log;
+import com.xiaoleilu.hutool.StrUtil;
+import com.xiaoleilu.ucloud.core.Param;
+import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.UcloudApiClient;
+import com.xiaoleilu.ucloud.util.Config;
+import com.xiaoleilu.ucloud.util.Validator;
+
+/**
+ * 云监控
+ * @author Looly
+ *
+ */
+public class UMon {
+	private final static Logger log = Log.get();
+	
+	private final UcloudApiClient client;
+	
+	// --------------------------------------------------------------- Constructor start
+	public UMon() {
+		this.client = new UcloudApiClient();
+	}
+	public UMon(Config config) {
+		this.client = new UcloudApiClient(config);
+	}
+	// --------------------------------------------------------------- Constructor end
+	
+	/**
+	 * 发送短信<br>
+	 * 1. 短信内容无论字母，汉字，中英文标点符号，均按照1个字符计算，内容长度不能多于600字。 <br>
+	 * 2. 增加内容:超过70字的短信，按照每条65字收取费用。<br>
+	 * @param content 短信内容
+	 * @param phoneNumbers 短信列表
+	 * @return 响应内容
+	 */
+	public Response sendSms(String content, Collection<String> phoneNumbers){
+		Param param = Param.create()
+				.set(UMonName.Content, content);
+		
+		int i = 0;
+		for (String phoneNumber : phoneNumbers) {
+			if(StrUtil.isNotBlank(phoneNumber) && Validator.isMobile(phoneNumber)) {
+				param.set("Phone." + i, phoneNumber);
+				i++;
+			}else {
+				log.warn("{} is not phone number!", phoneNumber);
+			}
+		}
+		
+		return client.get(UMonAction.SendSms, param);
+	}
+	
+	/**
+	 * 发送短信<br>
+	 * 1. 短信内容无论字母，汉字，中英文标点符号，均按照1个字符计算，内容长度不能多于600字。 <br>
+	 * 2. 增加内容:超过70字的短信，按照每条65字收取费用。<br>
+	 * @param content 短信内容
+	 * @param phoneNumbers 短信列表
+	 * @return 响应内容
+	 */
+	public Response sendSms(String content, String... phoneNumbers){
+		return sendSms(content, Arrays.asList(phoneNumbers));
+	}
+}
