@@ -98,7 +98,7 @@ public class Param extends TreeMap<String, Object> {
 	 * @return 本身
 	 */
 	public Param setAction(Action action) {
-		return set(Action.KEY, action);
+		return set(PublicName.Action, action);
 	}
 	
 	/**

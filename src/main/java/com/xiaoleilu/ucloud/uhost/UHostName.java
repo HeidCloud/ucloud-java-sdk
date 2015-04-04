@@ -8,8 +8,6 @@ import com.xiaoleilu.ucloud.Param.Name;
  *
  */
 public enum UHostName implements Name{
-	/** 镜像Id, 参见 DescribeImage */
-	ImageId,
 	/** 认证方式。密码: Password，key: KeyPair（暂不支持） */
 	LoginMode,
 	/** UHost密码，LoginMode为Password时此项必须（密码需使用base64进行编码） */
@@ -40,5 +38,14 @@ public enum UHostName implements Name{
 	/** 备注 */
 	Remark,
 	/** UDisk实例ID */
-	UDiskId
+	UDiskId,
+	/** 购买台数，范围[1,5] */
+	Count,
+	
+	/** 镜像Id, 参见 DescribeImage */
+	ImageId,
+	/** 操作系统类型：Linux， Windows 默认返回所有类型 */
+	OsType,
+	/** 标准镜像：Base，行业镜像：Business， 自定义镜像：Custom，默认返回所有类型 */
+	ImageType
 }

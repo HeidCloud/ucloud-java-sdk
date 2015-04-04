@@ -1,9 +1,13 @@
 package com.xiaoleilu.ucloud.uhost;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.xiaoleilu.ucloud.Param;
 import com.xiaoleilu.ucloud.PublicName;
 import com.xiaoleilu.ucloud.Response;
 import com.xiaoleilu.ucloud.UcloudApiClient;
+import com.xiaoleilu.ucloud.uhost.image.Image;
+import com.xiaoleilu.ucloud.uhost.image.ImageFilter;
 import com.xiaoleilu.ucloud.util.Config;
 import com.xiaoleilu.ucloud.util.Region;
 
@@ -13,6 +17,9 @@ import com.xiaoleilu.ucloud.util.Region;
  *
  */
 public class Uhost {
+	
+	public final static String NAME_IMAGE_SET = "ImageSet";
+	
 	UcloudApiClient client;
 	
 	// --------------------------------------------------------------- Constructor start
@@ -208,7 +215,33 @@ public class Uhost {
 	 * @return 返回结果
 	 */
 	public Response describeImage(Param param){
-		return client.get(UHostAction.DescribeImage, param);
+		return describeImage(param, null);
+	}
+	
+	/**
+	 * 获取主机或主机列表信息，并可根据数据中心，主机ID等参数进行过滤。
+	 * @param param 参数
+	 * @param filter 镜像过滤器
+	 * @return 返回结果
+	 */
+	public Response describeImage(Param param, ImageFilter filter){
+		final Response resp = client.get(UHostAction.DescribeImage, param);
+		final JSONArray imageSet = resp.getJson().getJSONArray(NAME_IMAGE_SET);
+		
+		//过滤
+		if(null != filter) {
+			final JSONArray filteredImageSet = new JSONArray();
+			JSONObject imageJson;
+			for(int i = 0; i < imageSet.size(); i++) {
+				imageJson = imageSet.getJSONObject(i);
+				if(filter.filter(Image.parse(imageJson))) {
+					filteredImageSet.add(imageJson);
+				}
+			}
+			resp.getJson().put(NAME_IMAGE_SET, filteredImageSet);
+		}
+		
+		return resp;
 	}
 	
 	/**

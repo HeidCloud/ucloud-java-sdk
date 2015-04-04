@@ -17,4 +17,7 @@ public class RetCode {
 	
 	/** 验证签名错误 */
 	public final static int SIGNATURE_VERFY_AC_ERROR= 172;
+	
+	/** 主机未关 */
+	public final static int UHOST_NOT_SHUTDOWN= 8010;
 }
