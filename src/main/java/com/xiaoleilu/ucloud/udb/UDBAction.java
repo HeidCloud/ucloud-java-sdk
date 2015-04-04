@@ -1,6 +1,6 @@
 package com.xiaoleilu.ucloud.udb;
 
-import com.xiaoleilu.ucloud.Action;
+import com.xiaoleilu.ucloud.core.Action;
 
 /**
  * 云数据库 UDB API指令

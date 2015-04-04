@@ -1,6 +1,6 @@
 package com.xiaoleilu.ucloud.uhost;
 
-import com.xiaoleilu.ucloud.Action;
+import com.xiaoleilu.ucloud.core.Action;
 
 /**
  * 云主机 UHost API指令

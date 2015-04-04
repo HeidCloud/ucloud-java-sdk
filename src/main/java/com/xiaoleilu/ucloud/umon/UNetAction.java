@@ -1,6 +1,6 @@
 package com.xiaoleilu.ucloud.umon;
 
-import com.xiaoleilu.ucloud.Action;
+import com.xiaoleilu.ucloud.core.Action;
 
 /**
  * 云监控 UMon API指令

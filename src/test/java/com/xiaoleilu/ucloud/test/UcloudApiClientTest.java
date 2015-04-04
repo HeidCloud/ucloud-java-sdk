@@ -1,8 +1,8 @@
 package com.xiaoleilu.ucloud.test;
 
-import com.xiaoleilu.ucloud.Param;
-import com.xiaoleilu.ucloud.Response;
-import com.xiaoleilu.ucloud.UcloudApiClient;
+import com.xiaoleilu.ucloud.core.Param;
+import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.util.Config;
 
 public class UcloudApiClientTest {

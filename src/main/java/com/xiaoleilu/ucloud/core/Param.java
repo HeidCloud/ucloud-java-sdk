@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud;
+package com.xiaoleilu.ucloud.core;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -98,7 +98,7 @@ public class Param extends TreeMap<String, Object> {
 	 * @return 本身
 	 */
 	public Param setAction(Action action) {
-		return set(PublicName.Action, action);
+		return set(PubName.Action, action);
 	}
 	
 	/**
@@ -121,7 +121,7 @@ public class Param extends TreeMap<String, Object> {
 	 * @return 本身
 	 */
 	public Param setPassword(String password){
-		return set(PublicName.Password, SecureUtil.base64(password, Global.CHARSET));
+		return set(PubName.Password, SecureUtil.base64(password, Global.CHARSET));
 	}
 
 	/**
@@ -280,12 +280,12 @@ public class Param extends TreeMap<String, Object> {
 	 */
 	public String genHttpParam(Config config){
 		//指令名称和数据中心必须存在
-		assertParams(PublicName.Action, PublicName.Region);
+		assertParams(PubName.Action, PubName.Region);
 		
 		//1. 设置公钥
-		this.set(PublicName.PublicKey, config.getPublicKey());
+		this.set(PubName.PublicKey, config.getPublicKey());
 		//2. 生成签名
-		this.set(PublicName.Signature, this.signature(config.getPrivateKey()));
+		this.set(PubName.Signature, this.signature(config.getPrivateKey()));
 		//3. 生成Http参数字符串
 		return this.encode();
 	}
@@ -294,8 +294,8 @@ public class Param extends TreeMap<String, Object> {
 	 * 检查参数
 	 * @param paramNames 参数名
 	 */
-	private void assertParams(PublicName... paramNames){
-		for (PublicName paramName : paramNames) {
+	private void assertParams(PubName... paramNames){
+		for (PubName paramName : paramNames) {
 			if(false == this.containsKey(paramName.name())){
 				throw new ParamException("Parameter '{}' not found!", paramName);
 			}

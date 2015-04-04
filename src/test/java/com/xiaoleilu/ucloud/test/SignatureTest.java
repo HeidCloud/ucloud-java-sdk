@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import com.xiaoleilu.hutool.Log;
-import com.xiaoleilu.ucloud.Param;
+import com.xiaoleilu.ucloud.core.Param;
 
 /**
  * 签名单元测试类

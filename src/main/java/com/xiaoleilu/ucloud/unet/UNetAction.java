@@ -1,6 +1,6 @@
 package com.xiaoleilu.ucloud.unet;
 
-import com.xiaoleilu.ucloud.Action;
+import com.xiaoleilu.ucloud.core.Action;
 
 /**
  * 网络 UNet API指令

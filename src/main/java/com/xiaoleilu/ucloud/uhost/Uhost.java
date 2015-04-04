@@ -2,14 +2,14 @@ package com.xiaoleilu.ucloud.uhost;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoleilu.ucloud.Param;
-import com.xiaoleilu.ucloud.PublicName;
-import com.xiaoleilu.ucloud.Response;
-import com.xiaoleilu.ucloud.UcloudApiClient;
+import com.xiaoleilu.ucloud.core.Param;
+import com.xiaoleilu.ucloud.core.PubName;
+import com.xiaoleilu.ucloud.core.Region;
+import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.uhost.image.Image;
 import com.xiaoleilu.ucloud.uhost.image.ImageFilter;
 import com.xiaoleilu.ucloud.util.Config;
-import com.xiaoleilu.ucloud.util.Region;
 
 /**
  * 云主机
@@ -57,7 +57,7 @@ public class Uhost {
 	 */
 	public Response terminateUHostInstance(Region region, String uHostId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId);
 		return client.get(UHostAction.DescribeUHostInstance, param);
 	}
@@ -96,7 +96,7 @@ public class Uhost {
 	 */
 	public Response startUHostInstance(Region region, String uHostId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId);
 		return client.get(UHostAction.StartUHostInstance, param);
 	}
@@ -109,7 +109,7 @@ public class Uhost {
 	 */
 	public Response stopUHostInstance(Region region, String uHostId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId);
 		return client.get(UHostAction.StopUHostInstance, param);
 	}
@@ -122,7 +122,7 @@ public class Uhost {
 	 */
 	public Response rebootUHostInstance(Region region, String uHostId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId);
 		return client.get(UHostAction.RebootUHostInstance, param);
 	}
@@ -136,7 +136,7 @@ public class Uhost {
 	 */
 	public Response resetUHostInstancePassword(Region region, String uHostId, String password){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId)
 				.setPassword(password);
 		return client.get(UHostAction.ResetUHostInstancePassword, param);
@@ -151,7 +151,7 @@ public class Uhost {
 	 */
 	public Response modifyUHostInstanceName(Region region, String uHostId, String name){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId)
 				.set(UHostName.Name, name);
 		return client.get(UHostAction.ModifyUHostInstanceName, param);
@@ -166,7 +166,7 @@ public class Uhost {
 	 */
 	public Response modifyUHostInstanceTag(Region region, String uHostId, String tag){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId)
 				.set(UHostName.Tag, tag);
 		return client.get(UHostAction.ModifyUHostInstanceTag, param);
@@ -181,7 +181,7 @@ public class Uhost {
 	 */
 	public Response modifyUHostInstanceRemark(Region region, String uHostId, String remark){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId)
 				.set(UHostName.Remark, remark);
 		return client.get(UHostAction.ModifyUHostInstanceRemark, param);
@@ -204,7 +204,7 @@ public class Uhost {
 	 */
 	public Response getUHostInstanceVncInfo(Region region, String uHostId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId);
 		return client.get(UHostAction.GetUHostInstanceVncInfo, param);
 	}
@@ -261,7 +261,7 @@ public class Uhost {
 	 */
 	public Response terminateCustomImage(Region region, String uHostId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId);
 		return client.get(UHostAction.TerminateCustomImage, param);
 	}
@@ -275,7 +275,7 @@ public class Uhost {
 	 */
 	public Response attachUdisk(Region region, String uHostId, String uDiskId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId)
 				.set(UHostName.UDiskId, uDiskId);
 		return client.get(UHostAction.AttachUdisk, param);
@@ -290,7 +290,7 @@ public class Uhost {
 	 */
 	public Response detachUdisk(Region region, String uHostId, String uDiskId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId)
 				.set(UHostName.UDiskId, uDiskId);
 		return client.get(UHostAction.DetachUdisk, param);
@@ -304,7 +304,7 @@ public class Uhost {
 	 */
 	public Response createUHostInstanceSnapshot(Region region, String uHostId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId);
 		return client.get(UHostAction.CreateUHostInstanceSnapshot, param);
 	}
@@ -317,7 +317,7 @@ public class Uhost {
 	 */
 	public Response describeUHostInstanceSnapshot(Region region, String uHostId){
 		final Param param = Param.create()
-				.set(PublicName.Region, region)
+				.set(PubName.Region, region)
 				.set(UHostName.UHostId, uHostId);
 		return client.get(UHostAction.DescribeUHostInstanceSnapshot, param);
 	}

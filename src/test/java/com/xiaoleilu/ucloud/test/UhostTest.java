@@ -4,9 +4,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import com.xiaoleilu.hutool.Log;
-import com.xiaoleilu.ucloud.Param;
-import com.xiaoleilu.ucloud.PublicName;
-import com.xiaoleilu.ucloud.Response;
+import com.xiaoleilu.ucloud.core.Param;
+import com.xiaoleilu.ucloud.core.PubName;
+import com.xiaoleilu.ucloud.core.Region;
+import com.xiaoleilu.ucloud.core.Response;
 import com.xiaoleilu.ucloud.uhost.ChargeType;
 import com.xiaoleilu.ucloud.uhost.LoginMode;
 import com.xiaoleilu.ucloud.uhost.UHostName;
@@ -15,7 +16,6 @@ import com.xiaoleilu.ucloud.uhost.image.Image;
 import com.xiaoleilu.ucloud.uhost.image.ImageFilter;
 import com.xiaoleilu.ucloud.uhost.image.ImageType;
 import com.xiaoleilu.ucloud.uhost.image.OsType;
-import com.xiaoleilu.ucloud.util.Region;
 
 /**
  * 云主机单元测试类
@@ -25,12 +25,36 @@ import com.xiaoleilu.ucloud.util.Region;
 public class UhostTest {
 	private final static  Logger log = Log.get();
 	
-	Uhost uhost = new Uhost();
+	private final Uhost uhost = new Uhost();
 	
+	/**
+	 * 第一步：查找我所需的镜像ID
+	 */
+	@Test
+	public void describeImage(){
+		Param param = Param.create()
+				.set(PubName.Region, Region.CN_NORTH_03)
+				.set(UHostName.OsType, OsType.Linux)
+				.set(UHostName.ImageType, ImageType.Base)
+				.set(PubName.Offset, 0)
+				.set(PubName.Limit, 5);
+		
+		log.debug("Junit: {}", uhost.describeImage(param, new ImageFilter(){
+			
+			@Override
+			public boolean filter(Image image) {
+				return image.getOsName().toLowerCase().contains("centos 7");
+			}
+		}).toPretty());
+	}
+	
+	/**
+	 * 第二步：询价
+	 */
 	@Test
 	public void getUhostInstacePrice(){
 		final Param param = Param.create()
-				.set(PublicName.Region, Region.CN_NORTH_03)
+				.set(PubName.Region, Region.CN_NORTH_03)
 				//CentOS 7.0 64位
 				.set(UHostName.ImageId, "uimage-5yt2b0")
 				.set(UHostName.CPU, 1)
@@ -43,10 +67,13 @@ public class UhostTest {
 		log.debug("Junit: {}", resp.toPretty());
 	}
 	
+	/**
+	 * 第三步：创建云主机
+	 */
 	@Test
 	public void createUHostInstance(){
 		final Param param = Param.create()
-				.set(PublicName.Region, Region.CN_NORTH_03)
+				.set(PubName.Region, Region.CN_NORTH_03)
 				//CentOS 7.0 64位
 				.set(UHostName.ImageId, "uimage-5yt2b0")
 				.set(UHostName.LoginMode, LoginMode.Password)
@@ -63,10 +90,17 @@ public class UhostTest {
 //		log.debug("Junit: {}", resp.toPretty());
 	}
 	
+	/**
+	 * 第四步：查看创建后的云主机信息
+	 */
 	@Test
-	public void startHostInstance(){
-		Response resp = uhost.startUHostInstance(Region.CN_NORTH_03, "uhost-agd0gk");
-		log.debug("Junit: {}", resp.toPretty());
+	public void describeUHostInstance(){
+		Param param = Param.create()
+				.set(PubName.Region, Region.CN_NORTH_03)
+				.set(PubName.Offset, 0)
+				.set(PubName.Limit, 50);
+		
+		log.debug("Junit: {}", uhost.describeUHostInstance(param).toPretty());
 	}
 	
 	@Test
@@ -76,30 +110,8 @@ public class UhostTest {
 	}
 	
 	@Test
-	public void describeUHostInstance(){
-		Param param = Param.create()
-				.set(PublicName.Region, Region.CN_NORTH_03)
-				.set(PublicName.Offset, 0)
-				.set(PublicName.Limit, 50);
-		
-		log.debug("Junit: {}", uhost.describeUHostInstance(param).toPretty());
-	}
-	
-	@Test
-	public void describeImage(){
-		Param param = Param.create()
-				.set(PublicName.Region, Region.CN_NORTH_03)
-				.set(UHostName.OsType, OsType.Linux)
-				.set(UHostName.ImageType, ImageType.Base)
-				.set(PublicName.Offset, 0)
-				.set(PublicName.Limit, 5);
-		
-		log.debug("Junit: {}", uhost.describeImage(param, new ImageFilter(){
-			
-			@Override
-			public boolean filter(Image image) {
-				return image.getOsName().toLowerCase().contains("centos 7");
-			}
-		}).toPretty());
+	public void startHostInstance(){
+		Response resp = uhost.startUHostInstance(Region.CN_NORTH_03, "uhost-agd0gk");
+		log.debug("Junit: {}", resp.toPretty());
 	}
 }

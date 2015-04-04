@@ -1,6 +1,6 @@
 package com.xiaoleilu.ucloud.ulb;
 
-import com.xiaoleilu.ucloud.Action;
+import com.xiaoleilu.ucloud.core.Action;
 
 /**
  * 负载均衡 ULB API指令

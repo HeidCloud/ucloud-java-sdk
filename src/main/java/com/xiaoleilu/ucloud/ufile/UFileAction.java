@@ -1,6 +1,6 @@
 package com.xiaoleilu.ucloud.ufile;
 
-import com.xiaoleilu.ucloud.Action;
+import com.xiaoleilu.ucloud.core.Action;
 
 /**
  * 对象存储 UFile API指令

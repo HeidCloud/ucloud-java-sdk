@@ -1,6 +1,6 @@
-package com.xiaoleilu.ucloud;
+package com.xiaoleilu.ucloud.core;
 
-import com.xiaoleilu.ucloud.Param.Name;
+import com.xiaoleilu.ucloud.core.Param.Name;
 
 
 /**
@@ -9,7 +9,7 @@ import com.xiaoleilu.ucloud.Param.Name;
  * @author Looly
  *
  */
-public enum PublicName implements Name{
+public enum PubName implements Name{
 	
 	/* ----------------------------- 公共参数 ----------------------------- */
 	/** 公钥 */

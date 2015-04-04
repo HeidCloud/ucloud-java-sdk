@@ -1,6 +1,6 @@
 package com.xiaoleilu.ucloud.uhost;
 
-import com.xiaoleilu.ucloud.Param.Name;
+import com.xiaoleilu.ucloud.core.Param.Name;
 
 /**
  * Uhost中使用的参数名

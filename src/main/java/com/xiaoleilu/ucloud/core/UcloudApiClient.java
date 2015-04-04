@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud;
+package com.xiaoleilu.ucloud.core;
 
 import java.io.IOException;
 
@@ -7,9 +7,9 @@ import com.xiaoleilu.hutool.HttpUtil;
 import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.hutool.log.LogWrapper;
+import com.xiaoleilu.ucloud.core.Response.RetCode;
 import com.xiaoleilu.ucloud.util.Config;
 import com.xiaoleilu.ucloud.util.Global;
-import com.xiaoleilu.ucloud.util.RetCode;
 
 /**
  * Ucloud Api请求客户端

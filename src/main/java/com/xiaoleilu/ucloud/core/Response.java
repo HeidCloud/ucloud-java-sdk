@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud;
+package com.xiaoleilu.ucloud.core;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -75,5 +75,27 @@ public class Response{
 	@Override
 	public String toString() {
 		return this.json.toJSONString();
+	}
+	
+	/**
+	 * API返回码
+	 * @author Looly
+	 *
+	 */
+	public static class RetCode {
+		/** API请求正常 */
+		public final static int OK = 0;
+		
+		/** API请求未知异常 */
+		public final static int ERROR= -1;
+		
+		/** 用户不存在 */
+		public final static int USER_NOT_EXISTS= 171;
+		
+		/** 验证签名错误 */
+		public final static int SIGNATURE_VERFY_AC_ERROR= 172;
+		
+		/** 主机未关 */
+		public final static int UHOST_NOT_SHUTDOWN= 8010;
 	}
 }

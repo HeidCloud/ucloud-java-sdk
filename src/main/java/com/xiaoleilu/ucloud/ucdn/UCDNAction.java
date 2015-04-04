@@ -1,6 +1,6 @@
 package com.xiaoleilu.ucloud.ucdn;
 
-import com.xiaoleilu.ucloud.Action;
+import com.xiaoleilu.ucloud.core.Action;
 
 /**
  * 接入云 UCDN API指令

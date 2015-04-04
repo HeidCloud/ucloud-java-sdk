@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud;
+package com.xiaoleilu.ucloud.core;
 
 /**
  * API指令接口<br>

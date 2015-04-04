@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud.util;
+package com.xiaoleilu.ucloud.core;
 
 /**
  * 数据中心
