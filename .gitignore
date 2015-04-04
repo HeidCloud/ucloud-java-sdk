@@ -31,4 +31,4 @@ local.properties
 /target
 
 # config files
-/src/test/resources/*
+/src/test/resources/*.setting
