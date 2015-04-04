@@ -1,7 +1,5 @@
 package com.xiaoleilu.ucloud.test;
 
-import java.io.IOException;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 
@@ -16,12 +14,17 @@ import com.xiaoleilu.ucloud.util.Region;
  *
  */
 public class UhostTest {
-	private Logger log = Log.get();
+	private final static  Logger log = Log.get();
 	
 	Uhost uhost = new Uhost();
 	
 	@Test
-	public void describeUHostInstance() throws IOException{
+	public void createUHostInstance(){
+		
+	}
+	
+	@Test
+	public void describeUHostInstance(){
 		Param param = Param.create()
 				.set("Region", Region.CN_NORTH_03)
 				.set("Offset", 0)
@@ -31,20 +34,12 @@ public class UhostTest {
 	}
 	
 	@Test
-	public void describeImage() throws IOException{
+	public void describeImage(){
 		Param param = Param.create()
 				.set("Region", Region.CN_NORTH_03)
 				.set("Offset", 0)
 				.set("Limit", 5);
 		
 		log.debug("Junit: {}", uhost.describeImage(param).toPretty());
-	}
-	
-	public static void main(String[] args) {
-		final Param param = Param.create()
-				.set("Region", Region.CN_NORTH_03)
-				.set("UHostId", "aaaaaaaaaa");
-		
-		System.out.println(param);
 	}
 }
