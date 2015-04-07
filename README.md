@@ -60,3 +60,7 @@ public class UcloudApiClientTest {
 	}
 }
 ```
+
+## 详细文档请参阅Wiki：
+
+[https://gitcafe.com/looly/ucloud-java-sdk/wiki/pages](https://gitcafe.com/looly/ucloud-java-sdk/wiki/pages)
