@@ -4,14 +4,14 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import com.xiaoleilu.hutool.Log;
+import com.xiaoleilu.ucloud.core.ChargeType;
 import com.xiaoleilu.ucloud.core.Param;
 import com.xiaoleilu.ucloud.core.PubName;
 import com.xiaoleilu.ucloud.core.Region;
 import com.xiaoleilu.ucloud.core.Response;
-import com.xiaoleilu.ucloud.uhost.ChargeType;
 import com.xiaoleilu.ucloud.uhost.LoginMode;
 import com.xiaoleilu.ucloud.uhost.UHostName;
-import com.xiaoleilu.ucloud.uhost.Uhost;
+import com.xiaoleilu.ucloud.uhost.UHost;
 import com.xiaoleilu.ucloud.uhost.image.Image;
 import com.xiaoleilu.ucloud.uhost.image.ImageFilter;
 import com.xiaoleilu.ucloud.uhost.image.ImageType;
@@ -25,7 +25,7 @@ import com.xiaoleilu.ucloud.uhost.image.OsType;
 public class UhostTest {
 	private final static  Logger log = Log.get();
 	
-	private final Uhost uhost = new Uhost();
+	private final UHost uhost = new UHost();
 	
 	/**
 	 * 第一步：查找我所需的镜像ID
@@ -39,13 +39,17 @@ public class UhostTest {
 				.set(PubName.Offset, 0)
 				.set(PubName.Limit, 5);
 		
-		log.debug("Junit: {}", uhost.describeImage(param, new ImageFilter(){
+		//镜像过滤器，官方API没有提供镜像的筛选功能，在此做了一个简易的镜像筛选。
+		//filter方法就是筛选镜像的，满足条件的镜像返回true，在此我筛选出操作系统名称包含"centos 7"关键字的镜像
+		ImageFilter imageFilter = new ImageFilter(){
 			
 			@Override
 			public boolean filter(Image image) {
 				return image.getOsName().toLowerCase().contains("centos 7");
 			}
-		}).toPretty());
+		};
+		
+		log.debug("Junit: {}", uhost.describeImage(param, imageFilter).toPretty());
 	}
 	
 	/**
@@ -103,12 +107,18 @@ public class UhostTest {
 		log.debug("Junit: {}", uhost.describeUHostInstance(param).toPretty());
 	}
 	
+	/**
+	 * 第五步：关闭云主机
+	 */
 	@Test
 	public void stopHostInstance(){
 		Response resp = uhost.stopUHostInstance(Region.CN_NORTH_03, "uhost-agd0gk");
 		log.debug("Junit: {}", resp.toPretty());
 	}
 	
+	/**
+	 * 第六步：启动云主机
+	 */
 	@Test
 	public void startHostInstance(){
 		Response resp = uhost.startUHostInstance(Region.CN_NORTH_03, "uhost-agd0gk");

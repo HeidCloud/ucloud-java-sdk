@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud.uhost;
+package com.xiaoleilu.ucloud.core;
 
 /**
  * 计费模式

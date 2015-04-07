@@ -35,71 +35,122 @@ public class Image {
 	private long createTime;
 	
 	// --------------------------------------------------------------- Getters And Setters start
+	/**
+	 * @return 镜像ID
+	 */
 	public String getImageId() {
 		return imageId;
 	}
-
+	/**
+	 * 设置镜像ID
+	 * @param imageId 镜像ID
+	 */
 	public void setImageId(String imageId) {
 		this.imageId = imageId;
 	}
 
+	/**
+	 * @return 镜像名称
+	 */
 	public String getImageName() {
 		return imageName;
 	}
-
+	/**
+	 * 设置镜像名称
+	 * @param imageName 镜像名称
+	 */
 	public void setImageName(String imageName) {
 		this.imageName = imageName;
 	}
 
+	/**
+	 * @return 镜像类型
+	 */
 	public ImageType getImageType() {
 		return imageType;
 	}
-
+	/**
+	 * 设置镜像类型
+	 * @param imageType 镜像类型
+	 */
 	public void setImageType(ImageType imageType) {
 		this.imageType = imageType;
 	}
 
+	/**
+	 * @return 镜像状态
+	 */
 	public String getState() {
 		return state;
 	}
-
+	/**
+	 * 设置镜像状态
+	 * @param state 镜像状态
+	 */
 	public void setState(String state) {
 		this.state = state;
 	}
 
+	/**
+	 * @return 镜像描述
+	 */
 	public String getImageDescription() {
 		return imageDescription;
 	}
-
+	/**
+	 * 设置镜像描述
+	 * @param imageDescription 镜像描述
+	 */
 	public void setImageDescription(String imageDescription) {
 		this.imageDescription = imageDescription;
 	}
 
+	/**
+	 * @return 操作系统名称
+	 */
 	public String getOsName() {
 		return osName;
 	}
-
+	/**
+	 * 设置操作系统名称
+	 * @param osName 操作系统名称
+	 */
 	public void setOsName(String osName) {
 		this.osName = osName;
 	}
 
+	/**
+	 * @return 操作系统类型
+	 */
 	public OsType getOsType() {
 		return osType;
 	}
-
+	/**
+	 * 设置操作系统类型
+	 * @param osType 操作系统类型
+	 */
 	public void setOsType(OsType osType) {
 		this.osType = osType;
 	}
 
+	/**
+	 * @return 创建时间
+	 */
 	public long getCreateTime() {
 		return createTime;
 	}
-
+	/**
+	 * 设置创建时间
+	 * @param createTime 创建时间
+	 */
 	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
 	}
 	// --------------------------------------------------------------- Getters And Setters end
 	
+	/**
+	 * 转为JSON字符串
+	 */
 	@Override
 	public String toString() {
 		return JSON.toJSONString(this);

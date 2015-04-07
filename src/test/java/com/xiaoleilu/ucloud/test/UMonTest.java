@@ -19,7 +19,7 @@ public class UMonTest {
 	
 	@Test
 	public void sendSmdTest(){
-		Response resp = uMon.sendSms("测试短信 from ucloud", "18847336369");
+		Response resp = uMon.sendSms("起床木有呀，太阳晒屁股了~~——来自耐你的小磊`(*∩_∩*)′", "15754739175");
 		log.debug("Junit: {}", resp.toPretty());
 	}
 }

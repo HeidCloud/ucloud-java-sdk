@@ -21,11 +21,14 @@ public class SignatureTest {
 	@Test
 	public void sinatureTest(){
 		
+		//官方签名结果
 		String officalPythonSignature = "7a517649e4e9da3b6c82c932d667daa1599ae3a1";
 		
+		//官方测试签名用的公钥和私钥
 		String publicKey = "ucloudsomeone@example.com1296235120854146120";
 		String privateKey = "46f09bb9fab4f12dfc160dae12273d5332b5debe";
 		
+		//加入与官方说明文档中一致的参数
 		Param param = Param.create()
 				.set("Action", "CreateUHostInstance")
 				.set("Region", "cn-north-01")
@@ -40,9 +43,10 @@ public class SignatureTest {
 				.set("Quantity", 1)
 				.set("PublicKey", publicKey);
 
+		//由于签名是针对参数的，我将签名方法放在参数对象中，这样相当于参数做了自我签名。
 		String signature = param.signature(privateKey);
 		
-		log.debug("Java                  signature: {}", signature);
+		log.debug("Java                 signature: {}", signature);
 		log.debug("Offical Python signature: {}", officalPythonSignature);
 		
 		//验证生成的签名是否与官方一致

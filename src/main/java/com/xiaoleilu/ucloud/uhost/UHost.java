@@ -6,6 +6,7 @@ import com.xiaoleilu.ucloud.core.Param;
 import com.xiaoleilu.ucloud.core.PubName;
 import com.xiaoleilu.ucloud.core.Region;
 import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.Ucloud;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.uhost.image.Image;
 import com.xiaoleilu.ucloud.uhost.image.ImageFilter;
@@ -16,18 +17,30 @@ import com.xiaoleilu.ucloud.util.Config;
  * @author Looly
  *
  */
-public class Uhost {
+public class UHost extends Ucloud{
 	
 	public final static String NAME_IMAGE_SET = "ImageSet";
 	
-	UcloudApiClient client;
-	
 	// --------------------------------------------------------------- Constructor start
-	public Uhost() {
-		this.client = new UcloudApiClient();
+	/**
+	 * 构造，公钥、私钥、API的URL读取默认配置文件中的信息
+	 */
+	public UHost() {
+		super();
 	}
-	public Uhost(Config config) {
-		this.client = new UcloudApiClient(config);
+	/**
+	 * 构造
+	 * @param config 配置文件
+	 */
+	public UHost(Config config) {
+		super(config);
+	}
+	/**
+	 * 构造
+	 * @param client UcloudApiClient
+	 */
+	public UHost(UcloudApiClient client) {
+		super(client);
 	}
 	// --------------------------------------------------------------- Constructor end
 	
