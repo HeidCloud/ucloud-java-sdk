@@ -6,6 +6,7 @@ import com.xiaoleilu.ucloud.core.Region;
 import com.xiaoleilu.ucloud.core.Response;
 import com.xiaoleilu.ucloud.core.Ucloud;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
+import com.xiaoleilu.ucloud.unet.security.SecurityRule;
 import com.xiaoleilu.ucloud.util.Config;
 
 public class UNet extends Ucloud{
@@ -188,5 +189,88 @@ public class UNet extends Ucloud{
 	 */
 	public Response describeSecurityGroup(Param param){
 		return client.get(UNetAction.DescribeSecurityGroup, param);
+	}
+	
+	/**
+	 * 获取防火墙组所绑定资源的外网IP
+	 * @param param 参数
+	 * @return 返回结果
+	 */
+	public Response describeSecurityGroupResource(Param param){
+		return client.get(UNetAction.DescribeSecurityGroupResource, param);
+	}
+	
+	/**
+	 * 创建防火墙组
+	 * @param region 数据中心
+	 * @param groupName 防火墙组名称
+	 * @param description 防火墙组描述
+	 * @param rules 规则数组（可配置多个规则）
+	 * @return 返回结果
+	 */
+	public Response createSecurityGroup(Region region, String groupName, String description, SecurityRule... rules){
+		final Param param = Param.create()
+				.set(PubName.Region, region)
+				.set(UNetName.GroupName, groupName)
+				.set(UNetName.Description, description);
+		
+		//add rules
+		for(int i=0; i < rules.length; i++) {
+			param.set("Rule." + i, rules[i]);
+		}
+		
+		return client.get(UNetAction.CreateSecurityGroup, param);
+	}
+	
+	/**
+	 * 更新防火墙规则
+	 * @param region 数据中心
+	 * @param groupId 防火墙资源ID
+	 * @param rules 规则数组（可配置多个规则）
+	 * @return 返回结果
+	 */
+	public Response createSecurityGroup(Region region, String groupId, SecurityRule... rules){
+		final Param param = Param.create()
+				.set(PubName.Region, region)
+				.set(UNetName.GroupId, groupId);
+		
+		//add rules
+		for(int i=0; i < rules.length; i++) {
+			param.set("Rule." + i, rules[i]);
+		}
+		
+		return client.get(UNetAction.CreateSecurityGroup, param);
+	}
+	
+	/**
+	 * 将防火墙应用到资源上
+	 * @param region 数据中心
+	 * @param groupId 防火墙资源ID
+	 * @param resourceType 所应用资源类型，如UHost
+	 * @param resourceId 所应用资源ID
+	 * @return 返回结果
+	 */
+	public Response grantSecurityGroup(Region region, String groupId, ResourceType resourceType, String resourceId){
+		final Param param = Param.create()
+				.set(PubName.Region, region)
+				.set(UNetName.GroupId, groupId)
+				.set(UNetName.ResourceType, resourceType)
+				.set(UNetName.ResourceId, resourceId);
+		
+		return client.get(UNetAction.GrantSecurityGroup, param);
+	}
+	
+	/**
+	 * 删除防火墙
+	 * @param region 数据中心
+	 * @param groupId 防火墙资源ID
+	 * @return 返回结果
+	 */
+	public Response deleteSecurityGroup(Region region, String groupId){
+		final Param param = Param.create()
+				.set(PubName.Region, region)
+				.set(UNetName.GroupId, groupId);
+		
+		return client.get(UNetAction.DeleteSecurityGroup, param);
 	}
 }

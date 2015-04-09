@@ -47,6 +47,12 @@ public enum UNetName implements Name{
 	ResourceId,
 	/** 申请数量，默认: 1 */
 	Count,
+	/** 防火墙组名称 */
+	GroupName,
+	/** 防火墙资源ID */
+	GroupId,
+	/** 防火墙组描述 */
+	Description,
 	
 	/** 内网VIP的IP地址 */
 	VIP,
