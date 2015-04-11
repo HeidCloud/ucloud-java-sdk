@@ -2,7 +2,7 @@ package com.xiaoleilu.ucloud.core;
 
 /**
  * 数据中心
- * @see http://docs.ucloud.cn/api/regionlist.html
+ * 请见官方文档：http://docs.ucloud.cn/api/regionlist.html
  * @author Looly
  *
  */

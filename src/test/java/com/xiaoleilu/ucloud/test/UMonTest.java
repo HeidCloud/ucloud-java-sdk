@@ -1,6 +1,5 @@
 package com.xiaoleilu.ucloud.test;
 
-import org.junit.Test;
 import org.slf4j.Logger;
 
 import com.xiaoleilu.hutool.Log;
@@ -17,7 +16,10 @@ public class UMonTest {
 	
 	private final UMon uMon = new UMon();
 	
-	@Test
+	/**
+	 * 发送短信测试
+	 */
+//	@Test
 	public void sendSmdTest(){
 		Response resp = uMon.sendSms("测试短信", "18801050000");
 		log.debug("Junit: {}", resp.toPretty());

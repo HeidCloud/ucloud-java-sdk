@@ -9,6 +9,11 @@ import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.unet.security.SecurityRule;
 import com.xiaoleilu.ucloud.util.Config;
 
+/**
+ * 网络
+ * @author Looly
+ *
+ */
 public class UNet extends Ucloud{
 	
 	// --------------------------------------------------------------- Constructor start
@@ -229,7 +234,7 @@ public class UNet extends Ucloud{
 	 * @param rules 规则数组（可配置多个规则）
 	 * @return 返回结果
 	 */
-	public Response createSecurityGroup(Region region, String groupId, SecurityRule... rules){
+	public Response updateSecurityGroup(Region region, String groupId, SecurityRule... rules){
 		final Param param = Param.create()
 				.set(PubName.Region, region)
 				.set(UNetName.GroupId, groupId);
@@ -239,7 +244,7 @@ public class UNet extends Ucloud{
 			param.set("Rule." + i, rules[i]);
 		}
 		
-		return client.get(UNetAction.CreateSecurityGroup, param);
+		return client.get(UNetAction.UpdateSecurityGroup, param);
 	}
 	
 	/**

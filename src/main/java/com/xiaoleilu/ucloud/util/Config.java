@@ -43,7 +43,6 @@ public class Config implements Cloneable{
 	 * 
 	 * @param publicKey 公钥
 	 * @param privateKey 私钥
-	 * @param baseUrl 请求API的URL
 	 */
 	public Config(String publicKey, String privateKey) {
 		super();
@@ -127,7 +126,6 @@ public class Config implements Cloneable{
 	 * 默认配置文件为config.setting，格式见config_sample.setting<br>
 	 * 配置文件放于项目根目录下既可，如果为Web项目，放于classes目录下既可<br>
 	 * 如果为Maven项目，放于src/main/resources下既可自动部署至相应目录。
-	 * @param setting 配置文件
 	 * @return 公共参数
 	 */
 	public static Config createFromSetting(){

@@ -22,7 +22,7 @@ import com.xiaoleilu.ucloud.uhost.image.OsType;
  * @author Looly
  *
  */
-public class UhostTest {
+public class UHostTest {
 	private final static  Logger log = Log.get();
 	
 	private final UHost uhost = new UHost();
@@ -49,7 +49,8 @@ public class UhostTest {
 			}
 		};
 		
-		log.debug("Junit: {}", uhost.describeImage(param, imageFilter).toPretty());
+		Response resp = uhost.describeImage(param, imageFilter);
+		log.debug("Describe Image: {}", resp.toPretty());
 	}
 	
 	/**
@@ -68,13 +69,13 @@ public class UhostTest {
 				.set(UHostName.ChargeType, ChargeType.Month);
 		
 		Response resp = uhost.getUHostInstancePrice(param);
-		log.debug("Junit: {}", resp.toPretty());
+		log.debug("UHost Instance Price: {}", resp.toPretty());
 	}
 	
 	/**
 	 * 第三步：创建云主机
 	 */
-	@Test
+//	@Test
 	public void createUHostInstance(){
 		final Param param = Param.create()
 				.set(PubName.Region, Region.CN_NORTH_03)
@@ -89,9 +90,8 @@ public class UhostTest {
 				.set(UHostName.ChargeType, ChargeType.Month)
 				.set(UHostName.Quantity, 1);
 		
-		log.debug("create instance param: {}", param);
-//		Response resp = uhost.createUHostInstance(param);
-//		log.debug("Junit: {}", resp.toPretty());
+		Response resp = uhost.createUHostInstance(param);
+		log.debug("Create Instance: {}", resp.toPretty());
 	}
 	
 	/**
@@ -104,24 +104,25 @@ public class UhostTest {
 				.set(PubName.Offset, 0)
 				.set(PubName.Limit, 50);
 		
-		log.debug("Junit: {}", uhost.describeUHostInstance(param).toPretty());
+		Response resp = uhost.describeUHostInstance(param);
+		log.debug("Describe UHost Instance: {}", resp.toPretty());
 	}
 	
 	/**
 	 * 第五步：关闭云主机
 	 */
-	@Test
+//	@Test
 	public void stopHostInstance(){
 		Response resp = uhost.stopUHostInstance(Region.CN_NORTH_03, "uhost-agd0gk");
-		log.debug("Junit: {}", resp.toPretty());
+		log.debug("Stop UHost Instance: {}", resp.toPretty());
 	}
 	
 	/**
 	 * 第六步：启动云主机
 	 */
-	@Test
+//	@Test
 	public void startHostInstance(){
 		Response resp = uhost.startUHostInstance(Region.CN_NORTH_03, "uhost-agd0gk");
-		log.debug("Junit: {}", resp.toPretty());
+		log.debug("Start UHost Instance: {}", resp.toPretty());
 	}
 }

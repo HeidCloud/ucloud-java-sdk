@@ -104,8 +104,7 @@ public class Param extends TreeMap<String, Object> {
 	/**
 	 * 设置多列
 	 * 
-	 * @param attr 属性
-	 * @param value 值
+	 * @param map Map
 	 * @return 本身
 	 */
 	public Param setAll(Map<String, Object> map) {

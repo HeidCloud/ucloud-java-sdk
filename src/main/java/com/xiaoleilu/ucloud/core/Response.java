@@ -65,6 +65,13 @@ public class Response{
 	}
 	
 	/**
+	 * @return 请求是否正常
+	 */
+	public boolean isOk() {
+		return RetCode.OK == this.getRetCode();
+	}
+	
+	/**
 	 * 输出格式化后的JSON字符串
 	 * @return 格式化后的JSON字符串
 	 */

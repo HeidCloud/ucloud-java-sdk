@@ -62,7 +62,7 @@ public class UcloudApiClient {
 			resStr = jsonObject.toString();
 		}
 		
-		log.debug("Response: {}", resStr);
+//		log.debug("Response: {}", resStr);
 		return resStr;
 	}
 	

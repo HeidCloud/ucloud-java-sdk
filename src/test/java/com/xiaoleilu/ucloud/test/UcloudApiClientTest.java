@@ -1,11 +1,16 @@
 package com.xiaoleilu.ucloud.test;
 
+import org.slf4j.Logger;
+
+import com.alibaba.fastjson.JSONObject;
+import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.ucloud.core.Param;
 import com.xiaoleilu.ucloud.core.Response;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.util.Config;
 
 public class UcloudApiClientTest {
+	private final static Logger log = Log.get();
 	
 	/**
 	 * UcloudApiClient使用样例
@@ -45,9 +50,12 @@ public class UcloudApiClientTest {
 		Response response = client.get(param);
 		
 		//返回的状态码
-		response.getRetCode();
+		int retCode = response.getRetCode();
+		log.debug("RetCode: {}", retCode);
 		//获得原始JSON对象（使用FastJSON）
-		response.getJson();
-		
+		JSONObject json = response.getJson();
+		log.debug("JSON: {}", json);
+		String pretty = response.toPretty();
+		log.debug("Pretty JSON: {}",pretty);
 	}
 }
