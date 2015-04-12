@@ -4,11 +4,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import com.xiaoleilu.hutool.Log;
-import com.xiaoleilu.ucloud.core.ChargeType;
 import com.xiaoleilu.ucloud.core.Param;
-import com.xiaoleilu.ucloud.core.PubName;
-import com.xiaoleilu.ucloud.core.Region;
 import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.enums.ChargeType;
+import com.xiaoleilu.ucloud.core.enums.PubName;
+import com.xiaoleilu.ucloud.core.enums.Region;
 import com.xiaoleilu.ucloud.uhost.LoginMode;
 import com.xiaoleilu.ucloud.uhost.UHostName;
 import com.xiaoleilu.ucloud.uhost.UHost;

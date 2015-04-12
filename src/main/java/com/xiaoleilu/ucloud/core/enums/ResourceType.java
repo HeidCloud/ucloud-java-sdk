@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud.unet;
+package com.xiaoleilu.ucloud.core.enums;
 
 /**
  * 弹性IP请求绑定的资源类型

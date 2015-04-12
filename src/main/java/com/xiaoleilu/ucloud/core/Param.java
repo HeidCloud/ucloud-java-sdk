@@ -14,6 +14,7 @@ import com.xiaoleilu.hutool.Conver;
 import com.xiaoleilu.hutool.HttpUtil;
 import com.xiaoleilu.hutool.SecureUtil;
 import com.xiaoleilu.hutool.StrUtil;
+import com.xiaoleilu.ucloud.core.enums.PubName;
 import com.xiaoleilu.ucloud.exception.ParamException;
 import com.xiaoleilu.ucloud.util.Config;
 import com.xiaoleilu.ucloud.util.Global;

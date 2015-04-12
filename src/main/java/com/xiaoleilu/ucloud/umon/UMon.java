@@ -68,4 +68,13 @@ public class UMon {
 	public Response sendSms(String content, String... phoneNumbers){
 		return sendSms(content, Arrays.asList(phoneNumbers));
 	}
+	
+	/**
+	 * 获取监控数据
+	 * @param param 参数
+	 * @return 结果
+	 */
+	public Response getMetric(Param param) {
+		return client.get(UMonAction.GetMetric, param);
+	}
 }

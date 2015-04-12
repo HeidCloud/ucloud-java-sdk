@@ -1,5 +1,6 @@
-package com.xiaoleilu.ucloud.core;
+package com.xiaoleilu.ucloud.core.enums;
 
+import com.xiaoleilu.ucloud.core.Param;
 import com.xiaoleilu.ucloud.core.Param.Name;
 
 

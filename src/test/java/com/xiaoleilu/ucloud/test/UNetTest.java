@@ -4,13 +4,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import com.xiaoleilu.hutool.Log;
-import com.xiaoleilu.ucloud.core.ChargeType;
 import com.xiaoleilu.ucloud.core.Param;
-import com.xiaoleilu.ucloud.core.PubName;
-import com.xiaoleilu.ucloud.core.Region;
 import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.enums.ChargeType;
+import com.xiaoleilu.ucloud.core.enums.PubName;
+import com.xiaoleilu.ucloud.core.enums.Region;
+import com.xiaoleilu.ucloud.core.enums.ResourceType;
 import com.xiaoleilu.ucloud.unet.OperatorName;
-import com.xiaoleilu.ucloud.unet.ResourceType;
 import com.xiaoleilu.ucloud.unet.UNet;
 import com.xiaoleilu.ucloud.unet.UNetName;
 import com.xiaoleilu.ucloud.unet.security.Proto;

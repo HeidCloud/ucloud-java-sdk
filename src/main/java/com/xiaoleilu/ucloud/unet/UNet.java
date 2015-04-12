@@ -1,11 +1,12 @@
 package com.xiaoleilu.ucloud.unet;
 
 import com.xiaoleilu.ucloud.core.Param;
-import com.xiaoleilu.ucloud.core.PubName;
-import com.xiaoleilu.ucloud.core.Region;
 import com.xiaoleilu.ucloud.core.Response;
 import com.xiaoleilu.ucloud.core.Ucloud;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
+import com.xiaoleilu.ucloud.core.enums.PubName;
+import com.xiaoleilu.ucloud.core.enums.Region;
+import com.xiaoleilu.ucloud.core.enums.ResourceType;
 import com.xiaoleilu.ucloud.unet.security.SecurityRule;
 import com.xiaoleilu.ucloud.util.Config;
 

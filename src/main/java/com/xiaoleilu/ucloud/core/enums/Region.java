@@ -1,4 +1,4 @@
-package com.xiaoleilu.ucloud.core;
+package com.xiaoleilu.ucloud.core.enums;
 
 /**
  * 数据中心
