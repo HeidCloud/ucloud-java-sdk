@@ -7,7 +7,7 @@
 
 	<groupId>com.xiaoleilu</groupId>
 	<artifactId>ucloud-java-sdk</artifactId>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<name>ucloud-java-sdk</name>
 	<description>ucloud-java-sdk</description>
 	<url>https://gitcafe.com/looly/ucloud-java-sdk</url>
@@ -42,6 +42,7 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.13</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.xiaoleilu</groupId>
@@ -58,6 +59,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

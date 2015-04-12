@@ -4,6 +4,8 @@
 ucloud-java-sdk是Ucloud官方API的Java封装，此SDK不但提供了接口的完整封装，还提供了一些自动化运维和自动化伸缩的相关功能。
 
 ## 安装
+
+### Maven
 在项目的pom.xml的dependencies中加入以下内容:
 
 ```XML
@@ -16,7 +18,18 @@ ucloud-java-sdk是Ucloud官方API的Java封装，此SDK不但提供了接口的�
 
 注：ucloud-java-sdk的版本可以通过 http://search.maven.org/ 搜索`ucloud-java-sdk`找到项目。
 
-## UcloudApiClient 使用
+### 非Maven项目
+可以从[http://search.maven.org/](http://search.maven.org/) 搜索`ucloud-java-sdk`找到项目，点击对应版本，下面是相应的Jar包，导入即可使用。
+
+下载地址：
+
+http://search.maven.org/remotecontent?filepath=com/xiaoleilu/ucloud-java-sdk/0.2.1/ucloud-java-sdk-0.2.2.jar
+
+
+## 开始
+
+### UcloudApiClient 使用
+
 ```Java
 package com.xiaoleilu.ucloud.test;
 
