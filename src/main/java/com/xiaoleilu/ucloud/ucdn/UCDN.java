@@ -4,6 +4,8 @@ import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.ucloud.core.Param;
 import com.xiaoleilu.ucloud.core.Response;
 import com.xiaoleilu.ucloud.core.Ucloud;
+import com.xiaoleilu.ucloud.core.UcloudApiClient;
+import com.xiaoleilu.ucloud.util.Config;
 
 /**
  * 云CDN
@@ -12,6 +14,29 @@ import com.xiaoleilu.ucloud.core.Ucloud;
  *
  */
 public class UCDN extends Ucloud {
+	
+	// --------------------------------------------------------------- Constructor start
+	/**
+	 * 构造，公钥、私钥、API的URL读取默认配置文件中的信息
+	 */
+	public UCDN() {
+		super();
+	}
+	/**
+	 * 构造
+	 * @param config 配置文件
+	 */
+	public UCDN(Config config) {
+		super(config);
+	}
+	/**
+	 * 构造
+	 * @param client UcloudApiClient
+	 */
+	public UCDN(UcloudApiClient client) {
+		super(client);
+	}
+	// --------------------------------------------------------------- Constructor end
 
 	/**
 	 * 购买流量

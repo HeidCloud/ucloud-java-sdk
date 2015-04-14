@@ -3,13 +3,11 @@ package com.xiaoleilu.ucloud.umon;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-
-import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.hutool.Validator;
 import com.xiaoleilu.ucloud.core.Param;
 import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.Ucloud;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.util.Config;
 
@@ -18,17 +16,28 @@ import com.xiaoleilu.ucloud.util.Config;
  * @author Looly
  *
  */
-public class UMon {
-	private final static Logger log = Log.get();
-	
-	private final UcloudApiClient client;
-	
+public class UMon extends Ucloud{
+
 	// --------------------------------------------------------------- Constructor start
+	/**
+	 * 构造，公钥、私钥、API的URL读取默认配置文件中的信息
+	 */
 	public UMon() {
-		this.client = new UcloudApiClient();
+		super();
 	}
+	/**
+	 * 构造
+	 * @param config 配置文件
+	 */
 	public UMon(Config config) {
-		this.client = new UcloudApiClient(config);
+		super(config);
+	}
+	/**
+	 * 构造
+	 * @param client UcloudApiClient
+	 */
+	public UMon(UcloudApiClient client) {
+		super(client);
 	}
 	// --------------------------------------------------------------- Constructor end
 	
