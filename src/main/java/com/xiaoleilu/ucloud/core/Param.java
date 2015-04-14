@@ -18,6 +18,7 @@ import com.xiaoleilu.ucloud.core.enums.PubName;
 import com.xiaoleilu.ucloud.exception.ParamException;
 import com.xiaoleilu.ucloud.util.Config;
 import com.xiaoleilu.ucloud.util.Global;
+import com.xiaoleilu.ucloud.util.SignatureUtil;
 
 /**
  * 参数对象
@@ -248,14 +249,7 @@ public class Param extends TreeMap<String, Object> {
 	 * @return 签名
 	 */
 	public String signature(String privateKey) {
-		final StringBuilder sb = new StringBuilder();
-
-		for (Entry<String, Object> entry : this.entrySet()) {
-			sb.append(entry.getKey()).append(entry.getValue());
-		}
-		sb.append(privateKey);
-
-		return SecureUtil.sha1(sb.toString(), Global.CHARSET);
+		return SignatureUtil.sign(this, privateKey);
 	}
 	
 	/**
