@@ -5,7 +5,7 @@ import com.xiaoleilu.ucloud.core.Param.Name;
 
 /**
  * 公共参数名枚举<br>
- * 此每句包括一些API参数中共用的参数名，例如公钥、私钥、指令名称、数据中心等
+ * 此枚举包括一些API参数中共用的参数名，例如公钥、私钥、指令名称、数据中心等
  * @author Looly
  *
  */
