@@ -7,7 +7,7 @@
 
 	<groupId>com.xiaoleilu</groupId>
 	<artifactId>ucloud-java-sdk</artifactId>
-	<version>0.3.0</version>
+	<version>0.5.0</version>
 	<name>ucloud-java-sdk</name>
 	<description>ucloud-java-sdk</description>
 	<url>https://gitcafe.com/looly/ucloud-java-sdk</url>
