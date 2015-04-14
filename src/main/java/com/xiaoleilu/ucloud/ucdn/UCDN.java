@@ -192,7 +192,7 @@ public class UCDN extends Ucloud {
 	 * 获取域名预取开启状态<br>
 	 * 网页加速开启预取需联系技术支持，大文件下载、点播默认开启预取。
 	 * 
-	 * @param param 参数
+	 * @param domainId 域名ID，创建加速域名时生成。
 	 * @return 返回结果
 	 */
 	public Response getUcdnDomainPrefetchEnale(String domainId) {
