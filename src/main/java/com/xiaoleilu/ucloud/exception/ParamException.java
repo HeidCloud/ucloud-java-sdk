@@ -8,7 +8,7 @@ import com.xiaoleilu.hutool.StrUtil;
  *
  */
 public class ParamException extends RuntimeException{
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5810833687966556207L;
 
 	public ParamException(Throwable e) {
 		super(e);

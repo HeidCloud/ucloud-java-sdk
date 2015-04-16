@@ -2,14 +2,15 @@ package com.xiaoleilu.ucloud.core;
 
 import java.io.IOException;
 
+import jodd.http.HttpResponse;
+
 import com.alibaba.fastjson.JSONObject;
-import com.xiaoleilu.hutool.HttpUtil;
 import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.hutool.log.LogWrapper;
 import com.xiaoleilu.ucloud.core.Response.RetCode;
 import com.xiaoleilu.ucloud.util.Config;
-import com.xiaoleilu.ucloud.util.Global;
+import com.xiaoleilu.ucloud.util.HttpRequestUtil;
 
 /**
  * Ucloud Api请求客户端
@@ -42,6 +43,14 @@ public class UcloudApiClient {
 	// --------------------------------------------------------------- Constructor end
 	
 	/**
+	 * 获得配置文件
+	 * @return 配置文件
+	 */
+	public Config getConfig() {
+		return this.config;
+	}
+	
+	/**
 	 * get请求API
 	 * @param resource 请求的资源
 	 * @param param 参数
@@ -52,18 +61,28 @@ public class UcloudApiClient {
 		final String uri = StrUtil.format("{}{}?{}", config.getBaseUrl(), resource, param.genHttpParam(config));
 		log.debug("Get: {}", uri);
 		
-		String resStr = null;
-		try {
-			resStr = HttpUtil.get(uri, Global.CHARSET, false);
-		} catch (IOException e) {
+		HttpResponse response = HttpRequestUtil.prepareGet(resource).send();
+		
+		final int statusCode = response.statusCode();
+		if(statusCode != 200) {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("RetCode"	, RetCode.ERROR);
-			jsonObject.put("Message", e.getMessage());
-			resStr = jsonObject.toString();
+			jsonObject.put("Message", "Status Code is" + statusCode);
+			return jsonObject.toString();
 		}
 		
+//		String resStr = null;
+//		try {
+//			resStr = HttpUtil.get(uri, Global.CHARSET, false);
+//		} catch (IOException e) {
+//			JSONObject jsonObject = new JSONObject();
+//			jsonObject.put("RetCode"	, RetCode.ERROR);
+//			jsonObject.put("Message", e.getMessage());
+//			resStr = jsonObject.toString();
+//		}
+		
 //		log.debug("Response: {}", resStr);
-		return resStr;
+		return response.bodyText();
 	}
 	
 	/**
@@ -74,6 +93,10 @@ public class UcloudApiClient {
 	 * @throws IOException
 	 */
 	public Response get(String resource, Param param){
+		if(param == null) {
+			param = Param.create();
+		}
+		
 		return Response.parse(getForStr(resource, param));
 	}
 	
@@ -97,6 +120,10 @@ public class UcloudApiClient {
 	 * @throws IOException
 	 */
 	public Response get(Action action, Param param){
+		if(param == null) {
+			param = Param.create();
+		}
+		
 		param.setAction(action);
 		return get("/", param);
 	}

@@ -8,7 +8,7 @@ import com.xiaoleilu.hutool.StrUtil;
  *
  */
 public class ConfigException extends RuntimeException{
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5134242152486033265L;
 
 	public ConfigException(Throwable e) {
 		super(e);

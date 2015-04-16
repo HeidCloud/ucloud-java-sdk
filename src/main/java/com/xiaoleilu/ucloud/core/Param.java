@@ -52,6 +52,28 @@ public class Param extends TreeMap<String, Object> {
 	/**
 	 * 创建参数对象
 	 * 
+	 * @param name 参数名
+	 * @param value 参数值
+	 * @return 参数对象
+	 */
+	public static Param create(String name, Object value) {
+		return new Param().set(name, value);
+	}
+	
+	/**
+	 * 创建参数对象
+	 * 
+	 * @param name 参数名对象
+	 * @param value 参数值
+	 * @return 参数对象
+	 */
+	public static Param create(Name name, Object value) {
+		return new Param().set(name, value);
+	}
+	
+	/**
+	 * 创建参数对象
+	 * 
 	 * @param paramMap 参数Map
 	 * @return 参数对象
 	 */

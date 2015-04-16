@@ -1,5 +1,6 @@
 package com.xiaoleilu.ucloud.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map.Entry;
 
 import com.xiaoleilu.hutool.SecureUtil;
@@ -12,6 +13,8 @@ import com.xiaoleilu.ucloud.core.Param;
  *
  */
 public class SignatureUtil {
+	
+	public static final String HMAC_SHA1 = "HmacSHA1";
 	
 	/**
 	 * 签名
@@ -37,5 +40,16 @@ public class SignatureUtil {
 		}
 		
 		return sign(sb.toString(), privateKey);
+	}
+	
+	/**
+	 * 使用MAC SHA-1算法签名
+	 * @param signStr 被签名字符串
+	 * @param privateKey 私钥
+	 * @return 签名值
+	 * @throws UnsupportedEncodingException 
+	 */
+	public static String macSign(String privateKey, String signStr) {
+		return SecureUtil.sha1(privateKey, signStr, Global.CHARSET);
 	}
 }

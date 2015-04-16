@@ -2,6 +2,7 @@ package com.xiaoleilu.ucloud.core;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.xiaoleilu.hutool.StrUtil;
 
 /**
  * API响应内容
@@ -9,6 +10,11 @@ import com.alibaba.fastjson.JSONObject;
  *
  */
 public class Response{
+	
+	private static final String RET_CODE = "RetCode";
+	private static final String MESSAGE = "Message";
+	private static final String TOTAL_COUNT = "TotalCount";
+	
 	private JSONObject json;
 	
 	/**
@@ -17,10 +23,22 @@ public class Response{
 	 * @return 响应对象
 	 */
 	public static Response parse(String jsonStr) {
-		Response response = new Response();
-		response.json = JSON.parseObject(jsonStr);
+		return new Response(jsonStr);
+	}
+	
+	/**
+	 * 构造
+	 * @param jsonStr Response JSON字符串
+	 */
+	public Response(String jsonStr) {
+		//对于文件操作，不返回内容，此时表示成功
+		if(StrUtil.isBlank(jsonStr)) {
+			json = new JSONObject();
+			json.put(RET_CODE, RetCode.OK);
+		}else {
+			json = JSON.parseObject(jsonStr);
+		}
 		
-		return response;
 	}
 	
 	/**
@@ -37,7 +55,7 @@ public class Response{
 	 * @return 响应状态码
 	 */
 	public int getRetCode() {
-		return this.json.getIntValue("RetCode");
+		return this.json.getIntValue(RET_CODE);
 	}
 	
 	/**
@@ -45,7 +63,7 @@ public class Response{
 	 * @return 返回消息
 	 */
 	public String getMessage() {
-		return this.json.getString("Message");
+		return this.json.getString(MESSAGE);
 	}
 	
 	/**
@@ -53,7 +71,7 @@ public class Response{
 	 * @return 满足条件结果数
 	 */
 	public int getTotalCount() {
-		return this.json.getIntValue("TotalCount");
+		return this.json.getIntValue(TOTAL_COUNT);
 	}
 	
 	/**

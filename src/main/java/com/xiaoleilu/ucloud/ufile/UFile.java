@@ -1,10 +1,19 @@
 package com.xiaoleilu.ucloud.ufile;
 
+import java.io.File;
+import java.io.IOException;
+
+import jodd.http.HttpRequest;
+
+import com.xiaoleilu.hutool.FileUtil;
+import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.ucloud.core.Param;
 import com.xiaoleilu.ucloud.core.Response;
 import com.xiaoleilu.ucloud.core.Ucloud;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
+import com.xiaoleilu.ucloud.exception.UFileException;
 import com.xiaoleilu.ucloud.util.Config;
+import com.xiaoleilu.ucloud.util.HttpRequestUtil;
 
 /**
  * 对象存储 UFile
@@ -45,6 +54,18 @@ public class UFile extends Ucloud{
 	public Response createBucket(Param param) {
 		return client.get(UFileAction.CreateBucket, param);
 	}
+	
+	/**
+	 * 创建Bucket<br>
+	 * Type： private
+	 * 无绑定域名
+	 * 
+	 * @param bucketName Bucket名
+	 * @return 返回结果
+	 */
+	public Response createBucket(String bucketName) {
+		return createBucket(Param.create(UFileName.BucketName, bucketName));
+	}
 
 	/**
 	 * 获取Bucket的描述信息
@@ -84,5 +105,108 @@ public class UFile extends Ucloud{
 	 */
 	public Response getFileList(Param param) {
 		return client.get(UFileAction.GetFileList, param);
+	}
+	
+	/**
+	 * 获取Bucket的文件列表
+	 * 
+	 * @param param 参数
+	 * @return 返回结果
+	 */
+	public Response getFileList(String bucketName) {
+		return getFileList(Param.create(UFileName.BucketName, bucketName));
+	}
+	
+	/**
+	 * 构建文件的URL
+	 * @param bucket Bucket
+	 * @param key 文件的key
+	 * @return 文件的URL
+	 */
+	public String buildFileUrl(String bucket, String key) {
+		return StrUtil.format("http://{}.ufile.ucloud.cn/{}", bucket, key);
+	}
+	
+	/**
+	 * 上传文件
+	 * @param bucket Bucket
+	 * @param file 文件
+	 * @param key 文件在服务器上的key
+	 * @param contentType 内容类型
+	 * @return 响应对象
+	 */
+	public Response putFile(String bucket, File file, String key, String contentType) {
+		byte[] fileBytes;
+		try {
+			fileBytes = FileUtil.readBytes(file);
+		} catch (IOException e) {
+			throw new UFileException(e.getMessage(), e);
+		}
+		
+		final HttpRequest put = HttpRequestUtil.preparePut(buildFileUrl(bucket, key))
+				.body(fileBytes, contentType);
+		
+		put.header("Authorization", Auth.build(bucket, key, "", "", client.getConfig(), put).toString());
+		
+		return Response.parse(put.send().bodyText());
+	}
+	
+	/**
+	 * 上传文件，上传后的文件与原文件名相同
+	 * @param bucket Bucket
+	 * @param file 文件
+	 * @param contentType 内容类型
+	 * @return 响应对象
+	 */
+	public Response putFile(String bucket, File file, String contentType) {
+		return putFile(bucket, file, file.getName(), contentType);
+	}
+	
+	/**
+	 * 上传文件
+	 * @param bucket Bucket
+	 * @param file 文件
+	 * @param key 文件在服务器上的key
+	 * @param contentType 内容类型
+	 * @return 响应对象
+	 */
+	public Response postFile(String bucket, File file, String key, String contentType) {
+		final HttpRequest post = HttpRequestUtil.preparePost(buildFileUrl(bucket, key));
+		
+		post
+			.contentType(contentType)
+			.form("FileName", key)
+			.form("Authorization", Auth.build(bucket, key, "", "", client.getConfig(), post).toString())
+			.form("file", file);
+		
+		return Response.parse(post.send().bodyText());
+	}
+	
+	/**
+	 * 上传文件，上传后的文件与原文件名相同
+	 * @param bucket Bucket
+	 * @param file 文件
+	 * @param key 文件在服务器上的key
+	 * @param contentType 内容类型
+	 * @return 响应对象
+	 */
+	public Response postFile(String bucket, File file, String contentType) {
+		return postFile(bucket, file, file.getName(), contentType);
+	}
+	
+	/**
+	 * 下载文件
+	 * @param bucket Bucket
+	 * @param file 文件
+	 * @param key 文件在服务器上的key
+	 * @param contentType 内容类型
+	 * @return 响应对象
+	 */
+	public String getFile(String bucket, String key) {
+		final HttpRequest get = HttpRequestUtil.prepareGet(buildFileUrl(bucket, key));
+		
+		get.header("Authorization", Auth.build(bucket, key, "", "", client.getConfig(), get).toString());
+		
+		return get.send().body();
 	}
 }
