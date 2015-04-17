@@ -1,9 +1,21 @@
 ![封面](https://gitcafe-image.b0.upaiyun.com/c6f592a6a94231bd62b5da91510dcf0a.jpg)
 
 # ucloud-java-sdk
+
 ucloud-java-sdk是Ucloud官方API的Java封装，此SDK不但提供了接口的完整封装，还提供了一些自动化运维和自动化伸缩的相关功能。
 
-## 安装
+## 功能特点
+
+1. 使用`Param`对象做为大多数SDK API的接口参数，摒弃`Bean`类型参数造成的灵活性不足
+2. 优雅的代码注释，为每个类、方法和枚举对象提供文档级别的注释信息，在通过Maven配合IDE的情况下最大限度减少文档的查阅。
+3. 代码提交至[Maven](http://maven.apache.org/)中央库，方便[Maven](http://maven.apache.org/)以及[Gradle](http://gradle.org/)项目的引用（再也不用到处找Jar引入ClassPath了）
+4. 部分功能完整的做单元测试，确保代码可用，而且单元测试类便是Example，降低学习门槛。
+5. `UcloudApiClient`类提供公共客户端，在API新增或变动方法时，旧版SDK依旧可以调用新接口。
+6. 灵活的配置：`Config`对象可以使用默认的`config.setting`，也可以使用自定义路径的配置文件，也可以使用`Config`对象在代码中指定参数（私钥、公钥等），为不同的项目提供高度可定制的功能。
+7. 提供灵活的`Response`。由于服务器返回JSON，SDK将JSON包装为Response，封装一些返回的JSON中公共的方法，其它则为对JSON的操作，大大提高灵活性。
+8. 详细的文档，为开发者提供良好的使用体验。
+
+## 引入SDK
 
 ### Maven
 在项目的pom.xml的dependencies中加入以下内容:
@@ -23,8 +35,11 @@ ucloud-java-sdk是Ucloud官方API的Java封装，此SDK不但提供了接口的�
 
 下载地址：
 
-http://search.maven.org/remotecontent?filepath=com/xiaoleilu/ucloud-java-sdk/0.7.0/ucloud-java-sdk-0.7.0.jar
+http://search.maven.org/remotecontent?filepath=com/xiaoleilu/ucloud-java-sdk/0.7.1/ucloud-java-sdk-0.7.1.jar
 
+## 配置
+
+私钥、公钥等信息可以在配置文件中设置，如果你使用的是默认的Ucloud Api请求客户端（`new UcloudApiClient()`），那可以在classpath下新建`config.setting`文件。文件内容请参阅`doc/config_sample.setting`
 
 ## 开始
 

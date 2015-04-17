@@ -7,7 +7,7 @@
 
 	<groupId>com.xiaoleilu</groupId>
 	<artifactId>ucloud-java-sdk</artifactId>
-	<version>0.7.0</version>
+	<version>0.7.1</version>
 	<name>ucloud-java-sdk</name>
 	<description>ucloud-java-sdk</description>
 	<url>https://gitcafe.com/looly/ucloud-java-sdk</url>
@@ -66,11 +66,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.10</version>
 		</dependency>
 	</dependencies>
 
