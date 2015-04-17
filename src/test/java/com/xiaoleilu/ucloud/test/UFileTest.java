@@ -70,7 +70,7 @@ public class UFileTest {
 	/**
 	 * 上传文件
 	 */
-	@Test
+//	@Test
 	public void postFileTest() {
 		Response res = ufile.postFile("looly2", new File("E:\\test.txt"), "text/plain");
 		log.debug("Post File: {}", res.toPretty());
@@ -80,7 +80,7 @@ public class UFileTest {
 	 * 下载文件
 	 * @throws IOException 
 	 */
-	@Test
+//	@Test
 	public void getFileTest() throws IOException {
 		File file = ufile.getFile("looly2", "test.txt", new File("e:\\test_download.txt"), false);
 		log.debug("Get File: {}", FileUtil.readString(file));
