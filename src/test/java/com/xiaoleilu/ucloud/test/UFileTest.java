@@ -1,6 +1,9 @@
 package com.xiaoleilu.ucloud.test;
 
 import java.io.File;
+import java.io.IOException;
+
+import jodd.io.FileUtil;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -75,10 +78,11 @@ public class UFileTest {
 	
 	/**
 	 * 下载文件
+	 * @throws IOException 
 	 */
 	@Test
-	public void getFileTest() {
-		String res = ufile.getFile("looly2", "test.txt");
-		log.debug("Get File: {}", res);
+	public void getFileTest() throws IOException {
+		File file = ufile.getFile("looly2", "test.txt", new File("e:\\test_download.txt"), false);
+		log.debug("Get File: {}", FileUtil.readString(file));
 	}
 }

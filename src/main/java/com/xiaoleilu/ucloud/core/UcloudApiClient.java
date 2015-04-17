@@ -2,15 +2,14 @@ package com.xiaoleilu.ucloud.core;
 
 import java.io.IOException;
 
-import jodd.http.HttpResponse;
-
 import com.alibaba.fastjson.JSONObject;
+import com.xiaoleilu.hutool.HttpUtil;
 import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.hutool.log.LogWrapper;
 import com.xiaoleilu.ucloud.core.Response.RetCode;
 import com.xiaoleilu.ucloud.util.Config;
-import com.xiaoleilu.ucloud.util.HttpRequestUtil;
+import com.xiaoleilu.ucloud.util.Global;
 
 /**
  * Ucloud Api请求客户端
@@ -61,28 +60,27 @@ public class UcloudApiClient {
 		final String uri = StrUtil.format("{}{}?{}", config.getBaseUrl(), resource, param.genHttpParam(config));
 		log.debug("Get: {}", uri);
 		
-		HttpResponse response = HttpRequestUtil.prepareGet(resource).send();
-		
-		final int statusCode = response.statusCode();
-		if(statusCode != 200) {
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("RetCode"	, RetCode.ERROR);
-			jsonObject.put("Message", "Status Code is" + statusCode);
-			return jsonObject.toString();
-		}
-		
-//		String resStr = null;
-//		try {
-//			resStr = HttpUtil.get(uri, Global.CHARSET, false);
-//		} catch (IOException e) {
+//		HttpResponse response = HttpRequestUtil.prepareGet(resource).send();
+//		
+//		final int statusCode = response.statusCode();
+//		if(statusCode != 200) {
 //			JSONObject jsonObject = new JSONObject();
 //			jsonObject.put("RetCode"	, RetCode.ERROR);
-//			jsonObject.put("Message", e.getMessage());
-//			resStr = jsonObject.toString();
+//			jsonObject.put("Message", "Status Code is" + statusCode);
+//			return jsonObject.toString();
 //		}
+//		return response.bodyText();
 		
-//		log.debug("Response: {}", resStr);
-		return response.bodyText();
+		String resStr = null;
+		try {
+			resStr = HttpUtil.get(uri, Global.CHARSET, false);
+		} catch (IOException e) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("RetCode"	, RetCode.ERROR);
+			jsonObject.put("Message", e.getMessage());
+			resStr = jsonObject.toString();
+		}
+		return resStr;
 	}
 	
 	/**

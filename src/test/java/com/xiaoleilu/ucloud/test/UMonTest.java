@@ -39,9 +39,10 @@ public class UMonTest {
 	public void getMetricTest() {
 		Param param = Param.create()
 				.set(PubName.Region, Region.CN_NORTH_03)
-				.set(UMonName.MetricName + ".0", MetricName.DiskReadOps)
+				.set(UMonName.MetricName + ".0", MetricName.CPUUtilization)
 				.set(UMonName.ResourceId, "uhost-agd0gk")
-				.set(UMonName.ResourceType, ResourceType.uhost);
+				.set(UMonName.ResourceType, ResourceType.uhost)
+				.set(UMonName.TimeRange, 1000);
 		Response res = uMon.getMetric(param);
 		
 		log.debug("Metric: {}", res.toPretty());

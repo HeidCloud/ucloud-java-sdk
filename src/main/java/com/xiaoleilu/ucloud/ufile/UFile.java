@@ -197,16 +197,32 @@ public class UFile extends Ucloud{
 	/**
 	 * 下载文件
 	 * @param bucket Bucket
-	 * @param file 文件
 	 * @param key 文件在服务器上的key
+	 * @param dest 文件
 	 * @param contentType 内容类型
+	 * @param isOverWrite 是否覆盖已有文件
 	 * @return 响应对象
 	 */
-	public String getFile(String bucket, String key) {
+	public File getFile(String bucket, String key, File dest, boolean isOverWrite) {
+		if(dest == null) {
+			throw new UFileException("Destination file is null!");
+		}
+		if(dest.isDirectory()) {
+			dest = new File(dest, key);
+		}
+		if(isOverWrite == false && dest.exists()) {
+			throw new UFileException("Destination file [{}] exist!", dest.getAbsolutePath());
+		}
+		
 		final HttpRequest get = HttpRequestUtil.prepareGet(buildFileUrl(bucket, key));
 		
 		get.header("Authorization", Auth.build(bucket, key, "", "", client.getConfig(), get).toString());
 		
-		return get.send().body();
+		try {
+			FileUtil.writeBytes(dest, get.send().bodyBytes());
+		} catch (IOException e) {
+		}
+		
+		return dest;
 	}
 }
