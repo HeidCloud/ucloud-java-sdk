@@ -93,7 +93,7 @@ public class Auth implements Cloneable{
 	 * 
 	 * @param publicKey 公钥
 	 * @param signature 签名
-	 * @return
+	 * @return 认证字符串
 	 */
 	public static String authorization(String publicKey, String signature) {
 		return StrUtil.builder().append("UCloud ").append(publicKey).append(":").append(signature).toString();

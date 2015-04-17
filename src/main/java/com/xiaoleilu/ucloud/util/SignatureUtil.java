@@ -28,7 +28,7 @@ public class SignatureUtil {
 	
 	/**
 	 * 签名
-	 * @param signStr 被签名字符串
+	 * @param param 被签名的参数
 	 * @param privateKey 私钥
 	 * @return 签名值
 	 */

@@ -110,7 +110,7 @@ public class UFile extends Ucloud{
 	/**
 	 * 获取Bucket的文件列表
 	 * 
-	 * @param param 参数
+	 * @param bucketName Bucket名
 	 * @return 返回结果
 	 */
 	public Response getFileList(String bucketName) {
@@ -186,7 +186,6 @@ public class UFile extends Ucloud{
 	 * 上传文件，上传后的文件与原文件名相同
 	 * @param bucket Bucket
 	 * @param file 文件
-	 * @param key 文件在服务器上的key
 	 * @param contentType 内容类型
 	 * @return 响应对象
 	 */
@@ -199,7 +198,6 @@ public class UFile extends Ucloud{
 	 * @param bucket Bucket
 	 * @param key 文件在服务器上的key
 	 * @param dest 文件
-	 * @param contentType 内容类型
 	 * @param isOverWrite 是否覆盖已有文件
 	 * @return 响应对象
 	 */
