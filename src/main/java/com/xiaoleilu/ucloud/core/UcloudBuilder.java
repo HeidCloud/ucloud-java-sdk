@@ -98,7 +98,7 @@ public class UcloudBuilder {
 	 * 发送请求
 	 * @return 返回的结果
 	 */
-	public StandardResponse send() {
-		return this.ucloud.getClient().get(param);
+	public Response send() {
+		return this.ucloud.send(param);
 	}
 }

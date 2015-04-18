@@ -43,4 +43,13 @@ public class Ucloud {
 	public UcloudApiClient getClient(){
 		return this.client;
 	}
+	
+	/**
+	 * 发送请求
+	 * @param param 参数
+	 * @return 响应结果
+	 */
+	public Response send(Param param){
+		return this.client.get(param);
+	}
 }
