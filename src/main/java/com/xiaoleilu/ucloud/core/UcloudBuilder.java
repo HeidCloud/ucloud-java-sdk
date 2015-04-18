@@ -91,8 +91,7 @@ public class UcloudBuilder {
 	
 	/**
 	 * 第三步，设置参数
-	 * @param name 参数名
-	 * @param value 参数值
+	 * @param param 参数
 	 * @return 自己
 	 */
 	public UcloudBuilder param(Param param) {
