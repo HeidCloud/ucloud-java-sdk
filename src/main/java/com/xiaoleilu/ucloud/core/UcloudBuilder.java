@@ -7,7 +7,7 @@ import com.xiaoleilu.ucloud.exception.BuilderException;
 import com.xiaoleilu.ucloud.util.Config;
 
 /**
- * 
+ * Ucloud构建器
  * @author Looly
  *
  */

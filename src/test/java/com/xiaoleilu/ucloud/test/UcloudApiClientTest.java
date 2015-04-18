@@ -5,16 +5,18 @@ import org.slf4j.Logger;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.ucloud.core.Param;
-import com.xiaoleilu.ucloud.core.StandardResponse;
+import com.xiaoleilu.ucloud.core.Response;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.util.Config;
 
+/**
+ * UcloudApiClient使用样例
+ * @author Looly
+ *
+ */
 public class UcloudApiClientTest {
 	private final static Logger log = Log.get();
 	
-	/**
-	 * UcloudApiClient使用样例
-	 */
 	public static void main(String[] args) {
 		UcloudApiClient client;
 		
@@ -47,7 +49,7 @@ public class UcloudApiClientTest {
 				.set("Quantity", 1);
 		
 		//请求API，Response是个封装了返回JSON的一个对象
-		StandardResponse response = client.get(param);
+		Response response = client.get(param);
 		
 		//返回的状态码
 		int retCode = response.getRetCode();
@@ -55,6 +57,7 @@ public class UcloudApiClientTest {
 		//获得原始JSON对象（使用FastJSON）
 		JSONObject json = response.getJson();
 		log.debug("JSON: {}", json);
+		//美化输出，更易于阅读
 		String pretty = response.toPretty();
 		log.debug("Pretty JSON: {}",pretty);
 	}
