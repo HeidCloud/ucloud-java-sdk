@@ -42,8 +42,9 @@ http://search.maven.org/remotecontent?filepath=com/xiaoleilu/ucloud-java-sdk/0.7
 私钥、公钥等信息可以在配置文件中设置，如果你使用的是默认的Ucloud Api请求客户端（`new UcloudApiClient()`），那可以在classpath下新建`config.setting`文件。文件内容请参阅`doc/config_sample.setting`
 
 ## 开始
+使用SDK调用相应功能有三种方法，推荐第三种。
 
-### UcloudApiClient 使用
+### 方法一：使用UcloudApiClient
 
 ```Java
 package com.xiaoleilu.ucloud.test;
@@ -131,7 +132,7 @@ public class UcloudApiClientTest {
 }
 ```
 
-### 构建着模式创建请求
+### 方法二：构建着模式创建请求
 ```Java
 package com.xiaoleilu.ucloud.test;
 
@@ -185,6 +186,9 @@ public class UcloudBuilderTest {
 	}
 }
 ```
+
+### 方法三：使用相应功能的类
+每个功能都有相应的类对应，创建响应对象，调用对象方法即可，详细请看Wiki。
 
 ## 详细文档请参阅Wiki：
 
