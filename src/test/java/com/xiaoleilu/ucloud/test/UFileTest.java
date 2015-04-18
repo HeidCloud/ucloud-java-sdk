@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 
 import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.ucloud.core.Response;
-import com.xiaoleilu.ucloud.core.Response;
 import com.xiaoleilu.ucloud.ufile.UFile;
 
 /**
