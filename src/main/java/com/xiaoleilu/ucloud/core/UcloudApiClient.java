@@ -90,12 +90,12 @@ public class UcloudApiClient {
 	 * @return 请求结果
 	 * @throws IOException
 	 */
-	public Response get(String resource, Param param){
+	public StandardResponse get(String resource, Param param){
 		if(param == null) {
 			param = Param.create();
 		}
 		
-		return Response.parse(getForStr(resource, param));
+		return StandardResponse.parse(getForStr(resource, param));
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class UcloudApiClient {
 	 * @return 请求结果
 	 * @throws IOException
 	 */
-	public Response get(Param param){
+	public StandardResponse get(Param param){
 		return get("/", param);
 	}
 	
@@ -117,7 +117,7 @@ public class UcloudApiClient {
 	 * @return 请求结果
 	 * @throws IOException
 	 */
-	public Response get(Action action, Param param){
+	public StandardResponse get(Action action, Param param){
 		if(param == null) {
 			param = Param.create();
 		}

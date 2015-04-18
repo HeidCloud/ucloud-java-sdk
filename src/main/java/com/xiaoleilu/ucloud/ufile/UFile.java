@@ -9,6 +9,7 @@ import com.xiaoleilu.hutool.FileUtil;
 import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.ucloud.core.Param;
 import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.StandardResponse;
 import com.xiaoleilu.ucloud.core.Ucloud;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.exception.UFileException;
@@ -148,7 +149,7 @@ public class UFile extends Ucloud{
 		
 		put.header("Authorization", Auth.build(bucket, key, "", "", client.getConfig(), put).toString());
 		
-		return Response.parse(put.send().bodyText());
+		return StandardResponse.parse(put.send().bodyText());
 	}
 	
 	/**
@@ -179,7 +180,7 @@ public class UFile extends Ucloud{
 			.form("Authorization", Auth.build(bucket, key, "", "", client.getConfig(), post).toString())
 			.form("file", file);
 		
-		return Response.parse(post.send().bodyText());
+		return StandardResponse.parse(post.send().bodyText());
 	}
 	
 	/**

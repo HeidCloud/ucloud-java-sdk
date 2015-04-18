@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaoleilu.hutool.Log;
 import com.xiaoleilu.ucloud.core.Param;
-import com.xiaoleilu.ucloud.core.Response;
+import com.xiaoleilu.ucloud.core.StandardResponse;
 import com.xiaoleilu.ucloud.core.UcloudApiClient;
 import com.xiaoleilu.ucloud.util.Config;
 
@@ -47,7 +47,7 @@ public class UcloudApiClientTest {
 				.set("Quantity", 1);
 		
 		//请求API，Response是个封装了返回JSON的一个对象
-		Response response = client.get(param);
+		StandardResponse response = client.get(param);
 		
 		//返回的状态码
 		int retCode = response.getRetCode();
