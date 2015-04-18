@@ -53,6 +53,11 @@ public class StandardResponse implements Response{
 	}
 	
 	@Override
+	public String getAction() {
+		return this.json.getString(ACTION);
+	}
+	
+	@Override
 	public String getMessage() {
 		return this.json.getString(MESSAGE);
 	}

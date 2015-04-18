@@ -11,6 +11,8 @@ public interface Response {
 	
 	/** 返回状态码的Name */
 	static final String RET_CODE = "RetCode";
+	/** API指令的Name */
+	static final String ACTION = "Action";
 	/** 返回消息的Name */
 	static final String MESSAGE = "Message";
 	/** 返回结果数的Name */
@@ -28,6 +30,12 @@ public interface Response {
 	 * @return 响应状态码
 	 */
 	public int getRetCode();
+	
+	/**
+	 * 获得API指令
+	 * @return API指令
+	 */
+	public String getAction();
 	
 	/**
 	 * 获得返回的消息（一般为错误消息）

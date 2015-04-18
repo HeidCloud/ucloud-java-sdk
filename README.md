@@ -33,9 +33,7 @@ ucloud-java-sdk是Ucloud官方API的Java封装，此SDK不但提供了接口的�
 ### 非Maven项目
 可以从[http://search.maven.org/](http://search.maven.org/) 搜索`ucloud-java-sdk`找到项目，点击对应版本，下面是相应的Jar包，导入即可使用。
 
-下载地址：
-
-http://search.maven.org/remotecontent?filepath=com/xiaoleilu/ucloud-java-sdk/0.7.1/ucloud-java-sdk-0.7.1.jar
+![](https://gitcafe-image.b0.upaiyun.com/5f9edb85807f28fe57119f61822650c7.png)
 
 ## 配置
 

@@ -15,6 +15,7 @@ import com.xiaoleilu.hutool.HttpUtil;
 import com.xiaoleilu.hutool.SecureUtil;
 import com.xiaoleilu.hutool.StrUtil;
 import com.xiaoleilu.ucloud.core.enums.PubName;
+import com.xiaoleilu.ucloud.core.enums.Region;
 import com.xiaoleilu.ucloud.exception.ParamException;
 import com.xiaoleilu.ucloud.util.Config;
 import com.xiaoleilu.ucloud.util.Global;
@@ -126,6 +127,42 @@ public class Param extends TreeMap<String, Object> {
 	}
 	
 	/**
+	 * 设置数据中心
+	 * @param region 数据中心
+	 * @return 本身
+	 */
+	public Param setRegion(Region region) {
+		return set(PubName.Region, region);
+	}
+	
+	/**
+	 * 特殊参数：设置密码，此方法对密码做了Base64编码
+	 * @param password 密码
+	 * @return 本身
+	 */
+	public Param setPassword(String password){
+		return set(PubName.Password, SecureUtil.base64(password, Global.CHARSET));
+	}
+	
+	/**
+	 * 设置数据偏移量
+	 * @param offset 数据偏移量
+	 * @return 本身
+	 */
+	public Param setOffset(int offset) {
+		return set(PubName.Offset, offset);
+	}
+	
+	/**
+	 * 设置返回数据长度
+	 * @param limit 返回数据长度
+	 * @return 本身
+	 */
+	public Param setLimit(int limit) {
+		return set(PubName.Limit, limit);
+	}
+	
+	/**
 	 * 设置多列
 	 * 
 	 * @param map Map
@@ -138,15 +175,6 @@ public class Param extends TreeMap<String, Object> {
 		return this;
 	}
 	
-	/**
-	 * 特殊参数：设置密码，此方法对密码做了Base64编码
-	 * @param password 密码
-	 * @return 本身
-	 */
-	public Param setPassword(String password){
-		return set(PubName.Password, SecureUtil.base64(password, Global.CHARSET));
-	}
-
 	/**
 	 * 获得特定类型值
 	 * 
