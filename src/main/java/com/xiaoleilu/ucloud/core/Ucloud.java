@@ -13,6 +13,7 @@ public class Ucloud {
 	protected final static LogWrapper log = Log.get();
 	
 	protected UcloudApiClient client;
+	protected Param param;
 	
 	// --------------------------------------------------------------- Constructor start
 	/**

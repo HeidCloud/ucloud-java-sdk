@@ -3,6 +3,7 @@ package com.xiaoleilu.ucloud.core;
 import com.xiaoleilu.ucloud.core.Param.Name;
 import com.xiaoleilu.ucloud.core.enums.PubName;
 import com.xiaoleilu.ucloud.core.enums.Region;
+import com.xiaoleilu.ucloud.exception.BuilderException;
 import com.xiaoleilu.ucloud.util.Config;
 
 /**
@@ -11,7 +12,6 @@ import com.xiaoleilu.ucloud.util.Config;
  *
  */
 public class UcloudBuilder {
-	private Param param;
 	private Ucloud ucloud;
 
 	// --------------------------------------------------------------- Constructor start
@@ -47,7 +47,7 @@ public class UcloudBuilder {
 	 * @return 自己
 	 */
 	public UcloudBuilder action(Action action) {
-		this.param = Param.create(PubName.Action, action);
+		this.ucloud.param = Param.create(PubName.Action, action);
 		return this;
 	}
 	
@@ -57,7 +57,9 @@ public class UcloudBuilder {
 	 * @return 自己
 	 */
 	public UcloudBuilder region(Region region) {
-		this.param.set(PubName.Region, region);
+		validateParam();
+		
+		this.ucloud.param.set(PubName.Region, region);
 		return this;
 	}
 	
@@ -68,7 +70,9 @@ public class UcloudBuilder {
 	 * @return 自己
 	 */
 	public UcloudBuilder param(String name, Object value) {
-		this.param.set(name, value);
+		validateParam();
+		
+		this.ucloud.param.set(name, value);
 		return this;
 	}
 	
@@ -79,7 +83,9 @@ public class UcloudBuilder {
 	 * @return 自己
 	 */
 	public UcloudBuilder param(Name name, Object value) {
-		this.param.set(name, value);
+		validateParam();
+		
+		this.ucloud.param.set(name, value);
 		return this;
 	}
 	
@@ -90,15 +96,28 @@ public class UcloudBuilder {
 	 * @return 自己
 	 */
 	public UcloudBuilder param(Param param) {
-		this.param.setAll(param);
+		validateParam();
+		
+		this.ucloud.param.setAll(param);
 		return this;
 	}
 	
 	/**
-	 * 发送请求
+	 * 第四步，构建Ucloud客户端
 	 * @return 返回的结果
 	 */
-	public Response send() {
-		return this.ucloud.send(param);
+	public Ucloud build() {
+		validateParam();
+		
+		return this.ucloud;
+	}
+	
+	/**
+	 * 验证参数
+	 */
+	private void validateParam() {
+		if(this.ucloud.param == null || this.ucloud.param.isEmpty()) {
+			throw new BuilderException("Please call action() method first to specified action!");
+		}
 	}
 }
