@@ -224,4 +224,18 @@ public class UFile extends Ucloud{
 		
 		return dest;
 	}
+	
+	/**
+	 * 删除文件
+	 * @param bucket Bucket
+	 * @param key 文件在服务器上的key
+	 * @return 响应对象
+	 */
+	public Response deleteFile(String bucket, String key) {
+		final HttpRequest delete = HttpRequestUtil.prepareDelete(buildFileUrl(bucket, key));
+		
+		delete.header("Authorization", Auth.build(bucket, key, "", "", client.getConfig(), delete).toString());
+		
+		return StandardResponse.parse(delete.send().bodyText());
+	}
 }

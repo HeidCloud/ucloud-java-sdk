@@ -85,4 +85,14 @@ public class UFileTest {
 		File file = ufile.getFile("looly2", "test.txt", new File("e:\\test_download.txt"), false);
 		log.debug("Get File: {}", FileUtil.readString(file));
 	}
+	
+	/**
+	 * 删除文件
+	 * @throws IOException 
+	 */
+//	@Test
+	public void deleteFileTest() throws IOException {
+		Response res = ufile.deleteFile("looly2", "test.txt");
+		log.debug("Get File: {}", res.toPretty());
+	}
 }
