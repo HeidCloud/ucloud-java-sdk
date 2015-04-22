@@ -133,7 +133,7 @@ public class UcloudApiClientTest {
 }
 ```
 
-### 方法二：构建着模式创建请求
+### 方法二：构建者模式创建请求
 ```Java
 package com.xiaoleilu.ucloud.test;
 
